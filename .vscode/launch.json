@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "name": "Flutter (lib\\main.dart)",
+            "type": "dart",
+            "request": "launch",
+            "cwd": "meonot_app\\our_app",
+            "program": "lib\\main.dart"
+        }
+    ]
+}
