@@ -5,8 +5,7 @@ class MainFormField extends StatelessWidget {
   const MainFormField({
     super.key,
     required this.hintText,
-    this.validator,
-
+    this.validator
     });
 
   final String hintText;

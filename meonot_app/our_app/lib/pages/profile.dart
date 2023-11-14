@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:our_app/util/drop_down_field.dart';
 import 'package:our_app/util/form_field.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -36,14 +37,10 @@ final _formKey = GlobalKey<FormState>();
               }
               return null;
               }),
-          MainFormField(
-            hintText: 'Meonot',
-            validator:(val){
-              if(val != null) {
-                return "ENTER VALID MEONOT";
-              }
-              return null;
-              }),
+          DropDownF(
+            hintText:"meonot" ,
+            lst: ["broshim", "ainstein"],
+            onChanged: (val){}),
           MainFormField(
             hintText: 'Building',
             validator:(val){
