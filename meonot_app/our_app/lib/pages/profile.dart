@@ -10,23 +10,27 @@ class ProfilePage extends StatefulWidget {
 class _ProfileFormState extends State<ProfilePage> {
   String meonot = "broshim";
   String floor = "a";
+
+  // not usful now haha 
   List<String> pickBuilding() {
     return meonot_allBuildings[meonot];
   }
    List<String> pickfloor() {
     return all_floors[meonot][floor];
    }
-final GlobalKey _key = GlobalKey();
+  
 final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(padding:  const EdgeInsets.all(30),
-       child: Form(
+       child: FormBuilder(
         key: _formKey,
         child: ListView(
         children: [
           MainFormField(
+            name: "name",
             hintText: 'Name',
             validator:(val){
               if(val != null) {
@@ -36,6 +40,7 @@ final _formKey = GlobalKey<FormState>();
               }),
 
           MainFormField(
+            name: "phone",
             hintText: 'Phone',
             validator:(val){
               if(val != null) {
@@ -44,17 +49,17 @@ final _formKey = GlobalKey<FormState>();
               return null;
               }),
             DropDownF(
+            name: "meonot",
             hintText:"meonot" ,
             lst: ["broshim", "einstein"],
             onChanged: (val){
               setState(() {
-                
                 meonot = val.toString();
               });
               return null;
             }),
             DropDownF(
-            key: _key,
+            name: "building",
             hintText:"building" ,
             lst: meonot_allBuildings[meonot],
             onChanged: (val){
@@ -63,12 +68,14 @@ final _formKey = GlobalKey<FormState>();
               });
             }),
           DropDownF(
+            name: "floor",
             hintText:"floor" ,
             lst: all_floors[meonot][floor],
             onChanged: (val){
               // TO DO function
             }),
           MainFormField(
+            name: "appartment",
             hintText: 'Appartment',
             validator:(val){
               return null;
@@ -76,6 +83,7 @@ final _formKey = GlobalKey<FormState>();
            const SizedBox(height: 30,),
           ElevatedButton(onPressed: (){} ,style: ButtonStyle(shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)))), child: const Text("Submit")), 
         ],
+
        )),
       ),
     );
