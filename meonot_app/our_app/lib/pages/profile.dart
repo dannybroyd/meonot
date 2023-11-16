@@ -11,12 +11,12 @@ class _ProfileFormState extends State<ProfilePage> {
   String meonot = "broshim";
   String floor = "a";
   List<String> pickBuilding() {
-    return meonot_all[meonot];
+    return meonot_allBuildings[meonot];
   }
    List<String> pickfloor() {
-    return floors_all[meonot][floor];
+    return all_floors[meonot][floor];
    }
-
+final GlobalKey _key = GlobalKey();
 final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -44,17 +44,19 @@ final _formKey = GlobalKey<FormState>();
               return null;
               }),
             DropDownF(
-            key: const Key("meonot"),
             hintText:"meonot" ,
             lst: ["broshim", "einstein"],
             onChanged: (val){
               setState(() {
+                
                 meonot = val.toString();
               });
+              return null;
             }),
             DropDownF(
+            key: _key,
             hintText:"building" ,
-            lst: pickBuilding(),
+            lst: meonot_allBuildings[meonot],
             onChanged: (val){
               setState(() {
               floor = val.toString().toLowerCase();
@@ -62,7 +64,7 @@ final _formKey = GlobalKey<FormState>();
             }),
           DropDownF(
             hintText:"floor" ,
-            lst: pickfloor(),
+            lst: all_floors[meonot][floor],
             onChanged: (val){
               // TO DO function
             }),

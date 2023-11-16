@@ -1,9 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:our_app/pages/home.dart';
-import 'package:our_app/pages/maintenance.dart';
-import 'package:our_app/pages/profile.dart';
-import 'package:our_app/pages/sleep.dart';
-import 'package:our_app/pages/visitors.dart';
+import 'package:our_app/util/resources/importss.dart';
 
 
 void main() {

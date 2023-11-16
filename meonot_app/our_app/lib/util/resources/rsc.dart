@@ -3,7 +3,7 @@ String b= "broshim";
 
 List<String> e_building = ["A","B","C","D","E","F","G","H"];
 List<String> b_building = ["A","B","C","D","E","F","G","H","I","J","K"];
-Map meonot_all = {"einstein":e_building, "broshim":b_building };
+Map meonot_allBuildings = {"einstein":e_building, "broshim":b_building };
 // einstein floors
 List<String> e_a_floor = ["1","2","3","4"];
 List<String> e_b_floor = ["-1", "0","1","2","3","4"];
@@ -30,4 +30,4 @@ List<String> b_k_floor = ["0","1","2","3","4","5","6","7","8"];
 Map b_floors = {"a":b_a_floor,"b":b_b_floor, "c": b_c_floor, "d":b_d_floor, "e":b_e_floor, "f":b_f_floor,"g":b_g_floor,"h":b_h_floor, "i":b_i_floor, "j": b_j_floor, "k": b_k_floor};
 
 // map of all the floors map
-Map floors_all = {"einstein": e_floors, "broshim": b_floors};
+Map all_floors = {"einstein": e_floors, "broshim": b_floors};
