@@ -8,87 +8,81 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfileFormState extends State<ProfilePage> {
-  String meonot = "broshim";
-  String floor = "a";
+
   final _formKey = GlobalKey<FormState>();
-  // not useful now haha 
-  List<String> pickBuilding() {
-    return meonot_allBuildings[meonot];
-  }
-   List<String> pickfloor() {
-    return all_floors[meonot][floor];
-   }
+  String e = "einstein";
+  String b= "broshim";
+  List<String> all_buildings = ["A","B","C","D","E","F","G","H","I","J","K"];
+  List<String> all_floors = ["-1","0","1","2","3","4","5","6","7","8","9","10","11", "12","13","14","15","G","ROOF"];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(padding:  const EdgeInsets.all(30),
-       child: FormBuilder(
-        key: _formKey,
-        child: ListView(
-        children: [
-          MainFormField(
-            name: "name",
-            hintText: 'Name',
-            validator:(val){
-              if(val != null) {
-                return "ENTER VALID NAME";
-              }
-              return null;
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        body: Padding(padding:  const EdgeInsets.all(30),
+         child: FormBuilder(
+          key: _formKey,
+          child: ListView(
+          children: [
+            MainFormField(
+              name: "name",
+              hintText: 'שם',
+              validator:(val){
+                if(val != null) {
+                  return "ENTER VALID NAME";
+                }
+                return null;
+                }),
+            MainFormField(
+              name: "phone",
+              hintText: 'טלפון',
+              validator:(val){
+                if(val != null) {
+                  return "ENTER VALID PHONE";
+                }
+                return null;
+                }),
+              DropDownF(
+              name: "meonot",
+              hintText:"מעונות" ,
+              lst: const ["broshim", "einstein"],
+              onChanged: (val){
+                //TO DO
+                return null;
               }),
-
-          MainFormField(
-            name: "phone",
-            hintText: 'Phone',
-            validator:(val){
-              if(val != null) {
-                return "ENTER VALID PHONE";
-              }
-              return null;
+              DropDownF(
+              name: "building",
+              hintText:"בניין" ,
+              lst: all_buildings,
+              onChanged: (val)
+              {
+                setState(() {
+                  // TO Do
+                });
+                return null;
               }),
             DropDownF(
-            name: "meonot",
-            hintText:"meonot" ,
-            lst: ["broshim", "einstein"],
-            onChanged: (val){
-              setState(() {
-                meonot = val.toString();
-              });
-              return null;
-            }),
-            DropDownF(
-            name: "building",
-            hintText:"building" ,
-            lst: meonot_allBuildings[meonot],
-            onChanged: (val){
-              setState(() {
-              floor = val.toString().toLowerCase();
-              });
-            }),
-          DropDownF(
-            name: "floor",
-            hintText:"floor" ,
-            lst: all_floors[meonot][floor],
-            onChanged: (val){
-              // TODO: function
-            }),
-          MainFormField(
-            name: "appartment",
-            hintText: 'Appartment',
-            validator:(val){
-              return null;
+              name: "floor",
+              hintText:"קומה" ,
+              lst: all_floors,
+              onChanged: (val){
+                // TODO: function
+                return null;
               }),
-           const SizedBox(height: 30,),
-          ElevatedButton(onPressed: (){} ,style: ButtonStyle(shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)))), child: const Text("Submit")), 
-          // TODO: make class of button, because we have same button in 3 different forms
-        ],
-
-       )),
+            MainFormField(
+              name: "appartment",
+              hintText: 'מספר דירה',
+              validator:(val){
+                return null;
+                }),
+             const SizedBox(height: 30,),
+            ElevatedButton(onPressed: (){} ,style: ButtonStyle(shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)))), child: const Text("Submit")), 
+            // TODO: make class of button, because we have same button in 3 different forms
+          ],
+         )),
+        ),
       ),
     );
   }
-  
- 
-  
-
 }
