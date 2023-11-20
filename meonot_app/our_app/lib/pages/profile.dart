@@ -10,16 +10,14 @@ class ProfilePage extends StatefulWidget {
 class _ProfileFormState extends State<ProfilePage> {
   String meonot = "broshim";
   String floor = "a";
-
-  // not usful now haha 
+  final _formKey = GlobalKey<FormState>();
+  // not useful now haha 
   List<String> pickBuilding() {
     return meonot_allBuildings[meonot];
   }
    List<String> pickfloor() {
     return all_floors[meonot][floor];
    }
-  
-final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +70,7 @@ final _formKey = GlobalKey<FormState>();
             hintText:"floor" ,
             lst: all_floors[meonot][floor],
             onChanged: (val){
-              // TO DO function
+              // TODO: function
             }),
           MainFormField(
             name: "appartment",
@@ -82,6 +80,7 @@ final _formKey = GlobalKey<FormState>();
               }),
            const SizedBox(height: 30,),
           ElevatedButton(onPressed: (){} ,style: ButtonStyle(shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)))), child: const Text("Submit")), 
+          // TODO: make class of button, because we have same button in 3 different forms
         ],
 
        )),

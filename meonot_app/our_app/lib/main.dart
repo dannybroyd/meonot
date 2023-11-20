@@ -1,3 +1,4 @@
+import 'package:our_app/pages/add_visitor.dart';
 import 'package:our_app/util/resources/importss.dart';
 
 
@@ -32,7 +33,8 @@ class MyApp extends StatelessWidget {
         '/profilepage' :(context) => const ProfilePage(),
         '/sleeppage' :(context) => const SleepPage(),
         '/visitorpage' :(context) => const VisitorsPage(),
-        '/maintenancepage' :(context) => const MaintenancePage()
+        '/maintenancepage' :(context) => const MaintenancePage(),
+        '/addvisitorpage' :(context) => const AddVisitorPage()
       },
       theme: ThemeData(primarySwatch: mainColor),
     );

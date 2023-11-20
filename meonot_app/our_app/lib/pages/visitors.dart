@@ -10,6 +10,11 @@ class VisitorsPage extends StatefulWidget {
 class _VisitorsPageState extends State<VisitorsPage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+          
+      ),
+    );
   }
 }
