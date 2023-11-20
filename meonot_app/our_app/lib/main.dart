@@ -2,7 +2,9 @@ import 'package:our_app/pages/add_visitor.dart';
 import 'package:our_app/util/resources/importss.dart';
 
 
-void main() {
+void main() async{
+  await Hive.initFlutter();
+  var box = await Hive.openBox('myUserSettings');
   runApp(const MyApp());
 }
 

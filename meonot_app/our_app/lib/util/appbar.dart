@@ -23,8 +23,9 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
       else {
       temp = "לילה טוב"; 
       }
+      String profileName = myProfile.name;
       // TODO: change Guest to name when doron finishes profile
-      return "$temp, אורח";
+      return "$temp, $profileName";
     }
     return text; 
   }

@@ -7,6 +7,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final _myBox = Hive.box('myUserSettings');
+  @override
+  void initState(){
+    if(_myBox.get('name') != null){
+      myProfile.loadData();
+      print(_myBox.get('name'));
+    }
+    super.initState();
+    }
+  
+    
   @override
   Widget build(BuildContext context) {
     return Directionality(

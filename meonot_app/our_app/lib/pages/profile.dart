@@ -1,5 +1,4 @@
-import 'dart:ffi';
-
+import 'package:our_app/data/database.dart';
 import 'package:our_app/util/resources/importss.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -10,19 +9,11 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfileFormState extends State<ProfilePage> {
-
   final _formKey = GlobalKey<FormBuilderState>();
   String e = "einstein";
   String b= "broshim";
   List<String> all_buildings = ["A","B","C","D","E","F","G","H","I","J","K"];
   List<String> all_floors = ["-1","0","1","2","3","4","5","6","7","8","9","10","11", "12","13","14","15","G","ROOF"];
-  String myName = "";
-  String myId = "";
-  String myPhone = "";
-  String myMeonot = "";
-  String myBuilding = "";
-  String myFloor ="";
-  String myAppartment = "";
   
   @override
   Widget build(BuildContext context) {
@@ -97,15 +88,17 @@ class _ProfileFormState extends State<ProfilePage> {
                 }),
              const SizedBox(height: 30,),
             ElevatedButton(
-              onPressed: (){  // saves the values
-               final myName = _formKey.currentState!.fields['name']!.value;
-               final myId = _formKey.currentState!.fields['id']!.value;
-               final myPhone= _formKey.currentState!.fields['phone']!.value;
-               final myMeonot = _formKey.currentState!.fields['meonot']!.value;
-               final myBuilding = _formKey.currentState!.fields['building']!.value;
-               final myFloor = _formKey.currentState!.fields['floor']!.value;
-               final myAppartment = _formKey.currentState!.fields['appartment']!.value;
-
+              onPressed: (){
+              setState(() {
+              myProfile.name = _formKey.currentState!.fields['name']!.value;
+              myProfile.id = _formKey.currentState!.fields['id']!.value;
+              myProfile.phone = _formKey.currentState!.fields['phone']!.value;
+              myProfile.dorms = _formKey.currentState!.fields['meonot']!.value;
+              myProfile.building = _formKey.currentState!.fields['building']!.value;
+              myProfile.floor = _formKey.currentState!.fields['floor']!.value;
+              myProfile.appartment = _formKey.currentState!.fields['appartment']!.value;
+              myProfile.updateData();
+              });  // saves the values
             },
             style: 
             ButtonStyle(shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)))), child: const Text("Submit")), 
