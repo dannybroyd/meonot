@@ -1,4 +1,3 @@
-import 'package:our_app/util/date_field.dart';
 import 'package:our_app/util/resources/importss.dart';
 
 class AddVisitorPage extends StatefulWidget {
@@ -37,6 +36,7 @@ class _AddVisitorPageState extends State<AddVisitorPage> {
               ),
               DatePicker(name: "leaveDate",
               hintText: "תאריך עזיבה",
+              leave: true,
               // TODO: validator
               )
               // TODO: Add button for validation and saving

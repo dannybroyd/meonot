@@ -1,12 +1,20 @@
+import 'package:intl/intl.dart';
 import 'package:our_app/util/resources/importss.dart';
 
 class DatePicker extends StatefulWidget {
   final String name;
   final String hintText;
   final String? Function(String?)? validator;
+  final bool leave;
 
-  const DatePicker({super.key, required this.name, required this.hintText, this.validator});
+  const DatePicker({super.key, required this.name, required this.hintText, this.validator, this.leave = false});
 
+  DateTime _defualtDate(){
+    if (leave){
+      return DateTime.now().add(const Duration(days: 1));
+    }
+    return DateTime.now();
+  }
   @override
   State<DatePicker> createState() => _DatePickerState();
 }
@@ -17,7 +25,9 @@ class _DatePickerState extends State<DatePicker> {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: FormBuilderDateTimePicker(
+        format: DateFormat('dd/MM/yyyy'),
         name: widget.name,
+        initialValue: widget._defualtDate(),
         firstDate: DateTime.now(),
         lastDate: DateTime.now().add(const Duration(days:30)),
         inputType: InputType.date,
