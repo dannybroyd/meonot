@@ -5,12 +5,13 @@ class MainFormField extends StatelessWidget {
     super.key,
     required this.name,
     required this.hintText,
-    this.validator
+    this.validator,
     });
 
   final String hintText;
   final String name;
   final String? Function(String?)? validator;
+
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +21,9 @@ class MainFormField extends StatelessWidget {
         name: name,
         validator: validator,
         decoration: InputDecoration(
-          hintText: hintText,
+          label: Text(hintText) ,
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
+
       ),
     );
   }

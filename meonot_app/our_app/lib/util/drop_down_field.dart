@@ -15,7 +15,6 @@ class DropDownF extends StatelessWidget {
   final String? Function(String?)? onChanged;
 
 
-
   List<DropdownMenuItem<String>> _makeItems(List<String> lst){
     List<DropdownMenuItem<String>> lst2 = lst.map(
     (e) => DropdownMenuItem(value: e, child: Text(e))).toList();

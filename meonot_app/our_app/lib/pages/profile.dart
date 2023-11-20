@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:our_app/util/resources/importss.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -9,17 +11,25 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfileFormState extends State<ProfilePage> {
 
-  final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormBuilderState>();
   String e = "einstein";
   String b= "broshim";
   List<String> all_buildings = ["A","B","C","D","E","F","G","H","I","J","K"];
   List<String> all_floors = ["-1","0","1","2","3","4","5","6","7","8","9","10","11", "12","13","14","15","G","ROOF"];
-
+  String myName = "";
+  String myId = "";
+  String myPhone = "";
+  String myMeonot = "";
+  String myBuilding = "";
+  String myFloor ="";
+  String myAppartment = "";
+  
   @override
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
+        appBar: const MyAppBar(),
         body: Padding(padding:  const EdgeInsets.all(30),
          child: FormBuilder(
           key: _formKey,
@@ -28,6 +38,15 @@ class _ProfileFormState extends State<ProfilePage> {
             MainFormField(
               name: "name",
               hintText: 'שם',
+              validator:(val){
+                if(val != null) {
+                  return "ENTER VALID NAME";
+                }
+                return null;
+                }),
+            MainFormField(
+              name: "id",
+              hintText: 'תעודת זהות',
               validator:(val){
                 if(val != null) {
                   return "ENTER VALID NAME";
@@ -65,7 +84,7 @@ class _ProfileFormState extends State<ProfilePage> {
             DropDownF(
               name: "floor",
               hintText:"קומה" ,
-              lst: all_floors,
+              lst: all_floors,         
               onChanged: (val){
                 // TODO: function
                 return null;
@@ -77,7 +96,19 @@ class _ProfileFormState extends State<ProfilePage> {
                 return null;
                 }),
              const SizedBox(height: 30,),
-            ElevatedButton(onPressed: (){} ,style: ButtonStyle(shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)))), child: const Text("Submit")), 
+            ElevatedButton(
+              onPressed: (){  // saves the values
+               final myName = _formKey.currentState!.fields['name']!.value;
+               final myId = _formKey.currentState!.fields['id']!.value;
+               final myPhone= _formKey.currentState!.fields['phone']!.value;
+               final myMeonot = _formKey.currentState!.fields['meonot']!.value;
+               final myBuilding = _formKey.currentState!.fields['building']!.value;
+               final myFloor = _formKey.currentState!.fields['floor']!.value;
+               final myAppartment = _formKey.currentState!.fields['appartment']!.value;
+
+            },
+            style: 
+            ButtonStyle(shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)))), child: const Text("Submit")), 
             // TODO: make class of button, because we have same button in 3 different forms
           ],
          )),
