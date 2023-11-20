@@ -25,7 +25,7 @@ class _AddVisitorPageState extends State<AddVisitorPage> {
               ),
               MainFormField(name: "name",
               hintText: "שם האורח", 
-              // TODO: validator
+              // TODO: 
               ),
               MainFormField(name: "phone",
               hintText: "טלפון אורח",
