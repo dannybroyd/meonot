@@ -14,10 +14,15 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
       if(hours>=1 && hours<=12){ 
       temp = "בוקר טוב"; 
       } else if(hours>=12 && hours<=16){
-      temp = "צהריים טובים"; 
-      } else if(hours>=16 && hours<=21){ 
+      temp = "צהריים טובים";
+      } else if(hours>=16 && hours<=18){
+      temp = "אחר הצהריים טובים";
+      } else if(hours>=18 && hours<=21){ 
       temp = "ערב טוב";
-      } else {temp = "לילה טוב"; }
+      }
+      else {
+      temp = "לילה טוב"; 
+      }
       // TODO: change Guest to name when doron finishes profile
       return "$temp, אורח";
     }
