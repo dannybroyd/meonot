@@ -9,6 +9,7 @@ class UserData{
   String building = '';
   String floor = '';
   String appartment = '';
+  List<Visitor> visitors = [];
 
   void createInitialData(){
     //?
@@ -22,9 +23,14 @@ class UserData{
     building = _myBox.get('building');
     floor = _myBox.get('floor');
     appartment = _myBox.get('appartment');
+    visitors = _myBox.get('visitors');
   }
 
   void updateData(){
     _myBox.putAll({'name': name, 'phone': phone, 'id': id, 'dorms': dorms, 'building': building, 'floor': floor, 'appartment': appartment});
+  }
+
+  void updateVisitors(){
+    _myBox.put('visitors', visitors);
   }
 }

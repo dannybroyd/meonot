@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
         '/maintenancepage' :(context) => const MaintenancePage(),
         '/addvisitorpage' :(context) => const AddVisitorPage(),
         '/homepage' :(context) => const HomePage(),
+        '/requestpage' :(context) => const RequestPage(),
       },
       theme: ThemeData(primarySwatch: mainColor),
     );

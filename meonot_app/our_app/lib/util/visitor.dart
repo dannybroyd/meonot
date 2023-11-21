@@ -3,12 +3,12 @@ class Visitor {
 
     String id;
     String name;
-    String number;
+    String phone;
 
   Visitor({
     required this.id,
     required this.name,
-    required this.number,
+    required this.phone,
   });
     
 } 
