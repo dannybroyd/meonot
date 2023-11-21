@@ -12,11 +12,28 @@ class _HomePageState extends State<HomePage> {
   // checks if all profile info has been inserted
   bool _checkBoxNotFull(){
     for(final f in fieldListUser){
-      if(_myBox.get(f) == null){
+      if(_myBox.get(f) == null || _myBox.get(f) == ''){
         return true;
       }
     }
     return false;
+  }
+
+  void _tellUserProfile(){
+    showDialog(
+      context: context,
+      builder: (context) => Directionality(
+        textDirection: TextDirection.rtl,
+        child: AlertDialog(
+          title: const Text("שלום!"),
+          content: const Text("אנא מלאו את כל הפרטים שלכם, לצורך השימוש בשליחת הטופס למעונות."),
+          actions: [
+            TextButton(onPressed: () => Navigator.pop(context),
+            child: const Text("הבנתי"))
+          ],
+      
+        ),
+      ),);
   }
 
   @override
@@ -34,6 +51,7 @@ class _HomePageState extends State<HomePage> {
     if (!_seen || _checkBoxNotFull()) {
       await prefs.setBool('seen', true); 
       Navigator.pushNamed(context, '/profilepage');
+      _tellUserProfile();
     } 
   } 
   
