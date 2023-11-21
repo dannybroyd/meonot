@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
       900: Color.fromRGBO(color.red, color.green, color.blue, 1.0)
   });
 
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,8 @@ class MyApp extends StatelessWidget {
         '/sleeppage' :(context) => const SleepPage(),
         '/visitorpage' :(context) => const VisitorsPage(),
         '/maintenancepage' :(context) => const MaintenancePage(),
-        '/addvisitorpage' :(context) => const AddVisitorPage()
+        '/addvisitorpage' :(context) => const AddVisitorPage(),
+        '/homepage' :(context) => const HomePage(),
       },
       theme: ThemeData(primarySwatch: mainColor),
     );

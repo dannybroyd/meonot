@@ -7,6 +7,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   final _myBox = Hive.box('myUserSettings');
   @override
   void initState(){
@@ -15,7 +16,17 @@ class _HomePageState extends State<HomePage> {
       print(_myBox.get('name'));
     }
     super.initState();
+    checkFirstSeen();
+    
     }
+  Future checkFirstSeen() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool _seen = (prefs.getBool('seen') ?? false);
+    if (!_seen || _myBox.get('name') == null) {
+      await prefs.setBool('seen', true); 
+      Navigator.pushNamed(context, '/profilepage');
+    } 
+  } 
   
     
   @override

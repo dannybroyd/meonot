@@ -23,6 +23,7 @@ class _ProfileFormState extends State<ProfilePage> {
         appBar: const MyAppBar(),
         body: Column(
           children: [
+            const SizedBox(height: 25,),
             const Text("הפרופיל שלי", style: TextStyle(fontWeight: FontWeight.w700, fontSize: 30),),
             Expanded(
               child: Padding(padding:  const EdgeInsets.all(30),
@@ -102,7 +103,7 @@ class _ProfileFormState extends State<ProfilePage> {
                     myProfile.floor = _formKey.currentState!.fields['floor']!.value;
                     myProfile.appartment = _formKey.currentState!.fields['appartment']!.value;
                     myProfile.updateData();
-                    Navigator.push(context,MaterialPageRoute(builder: (context) =>const HomePage()));
+                    Navigator.pushNamed(context, '/homepage');
                     });  // saves the values
                   },
                   style: 
