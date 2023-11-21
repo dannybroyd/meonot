@@ -7,22 +7,31 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   final _myBox = Hive.box('myUserSettings');
+
+  // checks if all profile info has been inserted
+  bool _checkBoxNotFull(){
+    for(final f in fieldListUser){
+      if(_myBox.get(f) == null){
+        return true;
+      }
+    }
+    return false;
+  }
+
   @override
   void initState(){
-    if(_myBox.get('name') != null){
+    if(_myBox.isNotEmpty){
       myProfile.loadData();
-      print(_myBox.get('name'));
-    }
+      }
     super.initState();
     checkFirstSeen();
-    
     }
+ 
   Future checkFirstSeen() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool _seen = (prefs.getBool('seen') ?? false);
-    if (!_seen || _myBox.get('name') == null) {
+    if (!_seen || _checkBoxNotFull()) {
       await prefs.setBool('seen', true); 
       Navigator.pushNamed(context, '/profilepage');
     } 
