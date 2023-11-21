@@ -34,6 +34,7 @@ class _ProfileFormState extends State<ProfilePage> {
                   MainFormField(
                     name: "name",
                     hintText: 'שם',
+                    initalValue: myProfile.name,
                     validator:(val){
                       if(val != null) {
                         return "ENTER VALID NAME";
@@ -43,6 +44,7 @@ class _ProfileFormState extends State<ProfilePage> {
                   MainFormField(
                     name: "id",
                     hintText: 'תעודת זהות',
+                    initalValue: myProfile.id,
                     validator:(val){
                       if(val != null) {
                         return "ENTER VALID NAME";
@@ -52,6 +54,7 @@ class _ProfileFormState extends State<ProfilePage> {
                   MainFormField(
                     name: "phone",
                     hintText: 'טלפון',
+                    initalValue: myProfile.phone,
                     validator:(val){
                       if(val != null) {
                         return "ENTER VALID PHONE";
@@ -61,6 +64,7 @@ class _ProfileFormState extends State<ProfilePage> {
                     DropDownF(
                     name: "meonot",
                     hintText:"מעונות" ,
+                    initalValue: myProfile.dorms,
                     lst: const ["broshim", "einstein"],
                     onChanged: (val){
                       //TO DO
@@ -69,6 +73,7 @@ class _ProfileFormState extends State<ProfilePage> {
                     DropDownF(
                     name: "building",
                     hintText:"בניין" ,
+                    initalValue: myProfile.building,
                     lst: all_buildings,
                     onChanged: (val)
                     {
@@ -80,6 +85,7 @@ class _ProfileFormState extends State<ProfilePage> {
                   DropDownF(
                     name: "floor",
                     hintText:"קומה",
+                    initalValue: myProfile.floor,
                     lst: all_floors,         
                     onChanged: (val){
                       // TODO: function
@@ -88,6 +94,7 @@ class _ProfileFormState extends State<ProfilePage> {
                   MainFormField(
                     name: "appartment",
                     hintText: 'מספר דירה',
+                    initalValue: myProfile.appartment,
                     validator:(val){
                       return null;
                       }),
