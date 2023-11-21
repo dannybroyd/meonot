@@ -7,12 +7,15 @@ class DropDownF extends StatelessWidget {
     required this.hintText,
     required this.lst,
     required this.initalValue,
-  });
+    this.validator,
+      }
+  );
 
   final String name;
   final String hintText;
   final List<String> lst;
   final String initalValue;
+  final String? Function(String?)? validator;
 
 
   List<DropdownMenuItem<String>> _makeItems(List<String> lst){
@@ -29,6 +32,7 @@ class DropDownF extends StatelessWidget {
         name: name,
         items: _makeItems(lst),
         initialValue:initalValue,
+        validator: validator,
         icon: const Icon(Icons.arrow_drop_down_circle_outlined),
         decoration: InputDecoration(
           hintText: hintText,

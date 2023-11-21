@@ -1,4 +1,3 @@
-import 'package:our_app/data/database.dart';
 import 'package:our_app/util/resources/importss.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -14,7 +13,13 @@ class _ProfileFormState extends State<ProfilePage> {
   String b= "broshim";
   List<String> all_buildings = ["A","B","C","D","E","F","G","H","I","J","K"];
   List<String> all_floors = ["-1","0","1","2","3","4","5","6","7","8","9","10","11", "12","13","14","15","G","ROOF"];
-  
+
+  String? pickPlease(String? val){  // for validation of frop down field
+    if(val==null || val.isEmpty){
+        return "בחר אופציה";
+      }
+      return null;
+  }
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -30,57 +35,70 @@ class _ProfileFormState extends State<ProfilePage> {
               name: "name",
               hintText: 'שם',
               initalValue: myProfile.name,
-              validator:(value) {
-                if (value!= "yes") {
-                  return 'Please enter some text';
+              validator:(val) {
+                if (val == null || val.isEmpty || !validEngAndHeb.hasMatch(val!)) {
+                  return 'שם אינו תקין';
                 }
                 return null;
-              },),
+              },
+            ),
             MainFormField(
               name: "id",
               hintText: 'תעודת זהות',
               initalValue: myProfile.id,
-              validator:(val){
-                if(val == null) {
-                  return "ENTER VALID NAME";
+              keyboardType: TextInputType.number,
+              validator:(val) {
+                if (val == null || val.isEmpty || !validId.hasMatch(val!)) {
+                  return 'ת.ז אינה תקינה';
                 }
                 return null;
-                }),
+              },
+            ),
             MainFormField(
               name: "phone",
               hintText: 'טלפון',
               initalValue: myProfile.phone,
-              validator:(val){
-                if(val == null) {
-                  return "ENTER VALID PHONE";
+              keyboardType: TextInputType.phone,
+              validator:(val) {
+                if (val == null || val.isEmpty || !validPhone.hasMatch(val!)) {
+                  return 'מספר הטלפון אינו תקין';
                 }
                 return null;
-                }),
-              DropDownF(
+              },
+            ),
+            DropDownF(
               name: "meonot",
               hintText:"מעונות" ,
               initalValue: myProfile.dorms,
+              validator: pickPlease,
               lst: const ["broshim", "einstein"],
               ),
-              DropDownF(
+            DropDownF(
               name: "building",
               hintText:"בניין" ,
               initalValue: myProfile.building,
+              validator: pickPlease,
               lst: all_buildings,
               ),
             DropDownF(
               name: "floor",
               hintText:"קומה",
               initalValue: myProfile.floor,
+              validator: pickPlease,
               lst: all_floors,         
               ),
             MainFormField(
               name: "appartment",
               hintText: 'מספר דירה',
               initalValue: myProfile.appartment,
-              validator:(val){
+              keyboardType: TextInputType.number,
+              validator:(val) {
+                if (val == null || val.isEmpty) {
+                  return 'מספר הדירה אינו תקין';
+                }
                 return null;
-                }),
+              },
+            ),
              const SizedBox(height: 30,),
             ElevatedButton(
               onPressed: (){
@@ -103,7 +121,7 @@ class _ProfileFormState extends State<ProfilePage> {
               });  // saves the values
             },
             style: 
-            ButtonStyle(shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)))), child: const Text("Submit")), 
+            ButtonStyle(shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)))), child: const Text("שמירה")), 
             // TODO: make class of button, because we have same button in 3 different forms
           ],
          )),
