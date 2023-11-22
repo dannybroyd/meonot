@@ -8,7 +8,7 @@ class AddVisitorPage extends StatefulWidget {
 }
 
 class _AddVisitorPageState extends State<AddVisitorPage> {
-  final _formKey = GlobalKey<FormBuilderState>();
+  final _formKey1 = GlobalKey<FormBuilderState>();
 
   @override
   Widget build(BuildContext context) {
@@ -16,31 +16,36 @@ class _AddVisitorPageState extends State<AddVisitorPage> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         body: FormBuilder(
-          key: _formKey,
+          key: _formKey1,
           child: ListView(
             children:  [
-              const MainFormField(name: "id",
+              MainFormField(name: "id",
               hintText: "תעודת זהות אורח",
-              // TODO: validator
+              validator: (val){return ourValidator(validId, val, " התעודת זהות אינה תקינה");},
+              keyboardType: TextInputType.number,
               ),
-              const MainFormField(name: "name",
+              MainFormField(name: "name",
               hintText: "שם האורח", 
-              // TODO: validator
+              validator: (val){return ourValidator(validEngAndHeb, val, " השם אינו תקין ");},
               ),
-              const MainFormField(name: "phone",
+              MainFormField(name: "phone",
               hintText: "טלפון אורח",
-              // TODO: validator
+              validator: (val){return ourValidator(validPhone, val, " מספר הטלפון אינו תקין ");},
+              keyboardType: TextInputType.phone,
               ),
-              // TODO: Add button for validation and saving
-              ElevatedButton(onPressed: (){
+              ElevatedButton(onPressed: ()
+              {
                 setState(() {
-                final newVisitor = Visitor(
-                  id: _formKey.currentState!.fields['id']!.value,
-                  name: _formKey.currentState!.fields['name']!.value, 
-                  phone: _formKey.currentState!.fields['phone']!.value);
-                myProfile.visitors.add(newVisitor);
-                myProfile.updateVisitors();
-                Navigator.pushNamed(context, '/requestpage');
+                  if(_formKey1.currentState!.validate()){
+                    final newVisitor = Visitor(
+                      id: _formKey1.currentState!.fields['id']!.value,
+                      name: _formKey1.currentState!.fields['name']!.value, 
+                      phone: _formKey1.currentState!.fields['phone']!.value);
+                      myProfile.visitors.add(newVisitor);
+                      myProfile.updateVisitors();
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("פרטי האורח נשמרו")));
+                      Navigator.pushNamed(context, '/requestpage');
+                    }
                 });
               },
               style: ButtonStyle(shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)))), 

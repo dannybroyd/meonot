@@ -35,36 +35,21 @@ class _ProfileFormState extends State<ProfilePage> {
               name: "name",
               hintText: 'שם',
               initalValue: myProfile.name,
-              validator:(val) {
-                if (val == null || val.isEmpty || !validEngAndHeb.hasMatch(val!)) {
-                  return 'שם אינו תקין';
-                }
-                return null;
-              },
+              validator:(val){return ourValidator(validEngAndHeb, val, " השם אינו תקין ");}
             ),
             MainFormField(
               name: "id",
               hintText: 'תעודת זהות',
               initalValue: myProfile.id,
               keyboardType: TextInputType.number,
-              validator:(val) {
-                if (val == null || val.isEmpty || !validId.hasMatch(val!)) {
-                  return 'ת.ז אינה תקינה';
-                }
-                return null;
-              },
+              validator:(val){return ourValidator(validId, val, "ת.ז אינה תקינה");}
             ),
             MainFormField(
               name: "phone",
               hintText: 'טלפון',
               initalValue: myProfile.phone,
               keyboardType: TextInputType.phone,
-              validator:(val) {
-                if (val == null || val.isEmpty || !validPhone.hasMatch(val!)) {
-                  return 'מספר הטלפון אינו תקין';
-                }
-                return null;
-              },
+              validator:(val){return ourValidator(validPhone, val, " מספר הטלפון אינו תקין ");}
             ),
             DropDownF(
               name: "meonot",
@@ -92,12 +77,7 @@ class _ProfileFormState extends State<ProfilePage> {
               hintText: 'מספר דירה',
               initalValue: myProfile.appartment,
               keyboardType: TextInputType.number,
-              validator:(val) {
-                if (val == null || val.isEmpty) {
-                  return 'מספר הדירה אינו תקין';
-                }
-                return null;
-              },
+              validator:(val){return ourValidator(validNumber, val, " מספר הדירה אינו תקין ");}
             ),
              const SizedBox(height: 30,),
             ElevatedButton(
@@ -112,11 +92,8 @@ class _ProfileFormState extends State<ProfilePage> {
                   myProfile.floor = _formKey.currentState!.fields['floor']!.value;
                   myProfile.appartment = _formKey.currentState!.fields['appartment']!.value;
                   myProfile.updateData();
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("הפרטים נשמרו")));
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("הפרטים נשמרו")));
                   Navigator.pushNamed(context, '/homepage');
-                  }
-                else{
-                  print(_formKey.currentState?.instantValue.toString());
                   }
               });  // saves the values
             },
