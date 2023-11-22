@@ -33,18 +33,22 @@ class _AddVisitorPageState extends State<AddVisitorPage> {
               validator: (val){return ourValidator(validPhone, val, " מספר הטלפון אינו תקין ");},
               keyboardType: TextInputType.phone,
               ),
+              const MainCheckBox(name: "checkBox", title: Text("הוספה למועדפים", style:TextStyle(fontSize: 16) )),
               ElevatedButton(onPressed: ()
               {
                 setState(() {
                   if(_formKey1.currentState!.validate()){
-                    final newVisitor = Visitor(
-                      id: _formKey1.currentState!.fields['id']!.value,
-                      name: _formKey1.currentState!.fields['name']!.value, 
-                      phone: _formKey1.currentState!.fields['phone']!.value);
-                      myProfile.visitors.add(newVisitor);
-                      myProfile.updateVisitors();
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("פרטי האורח נשמרו")));
-                      Navigator.pushNamed(context, '/requestpage');
+                    if(_formKey1.currentState!.fields['checkBox']!.value){
+                      final newVisitor = Visitor(
+                        id: _formKey1.currentState!.fields['id']!.value,
+                        name: _formKey1.currentState!.fields['name']!.value, 
+                        phone: _formKey1.currentState!.fields['phone']!.value);
+                        myProfile.visitors.add(newVisitor);
+                        myProfile.updateVisitors();
+                        print("haha");
+                        }
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("פרטי האורח נשמרו")));
+                        Navigator.pushNamed(context, '/requestpage');
                     }
                 });
               },
