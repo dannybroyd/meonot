@@ -40,6 +40,7 @@ class _AddVisitorPageState extends State<AddVisitorPage> {
                   phone: _formKey.currentState!.fields['phone']!.value);
                 myProfile.visitors.add(newVisitor);
                 myProfile.updateVisitors();
+                Navigator.pushNamed(context, '/requestpage');
                 });
               },
               style: ButtonStyle(shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)))), 

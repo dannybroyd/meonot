@@ -43,6 +43,7 @@ class _HomePageState extends State<HomePage> {
       }
     super.initState();
     checkFirstSeen();
+    print(myProfile.visitors.toString());
     }
  
   Future checkFirstSeen() async {
