@@ -9,7 +9,7 @@ class UserData{
   String building = '';
   String floor = '';
   String appartment = '';
-  List<Visitor> visitors = [];
+  List visitors = [];
 
   void createInitialData(){
     //?

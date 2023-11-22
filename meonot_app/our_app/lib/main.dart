@@ -4,6 +4,7 @@ import 'package:our_app/util/resources/importss.dart';
 
 void main() async{
   await Hive.initFlutter();
+  Hive.registerAdapter(VisitorAdapter());
   var box = await Hive.openBox('myUserSettings');
   runApp(const MyApp());
 }
