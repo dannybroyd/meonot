@@ -13,7 +13,7 @@ class _VisitorTileState extends State<VisitorTile> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        
+        Navigator.push(context, MaterialPageRoute(builder: (context) => RequestPage(finalVisitor: widget.savedVisitor),));
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
