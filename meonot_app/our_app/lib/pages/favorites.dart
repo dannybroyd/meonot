@@ -28,8 +28,13 @@ class _FavoritesPageState extends State<FavoritesPage> {
           height: 56,
           child: FloatingActionButton.extended(
             onPressed: (){
-              if(widget._isOvernight){Navigator.pushNamed(context, '/addvisitorpage');}
-              else{Navigator.push(context, MaterialPageRoute(builder: (context) => AddVisitorPage(isOvernight: widget._isOvernight,),));}
+              if(widget._isOvernight){
+                Navigator.pushNamed(context, '/addvisitorpage');
+                }
+              else{
+                // if not overnight, need to go to requestvisitor after addvisitor
+                Navigator.push(context, MaterialPageRoute(builder: (context) => AddVisitorPage(isOvernight: widget._isOvernight,),));
+                }
             },
             label: const Text(
               "מבקר חדש",
