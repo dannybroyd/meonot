@@ -1,9 +1,8 @@
 import 'package:our_app/util/resources/importss.dart';
 
 class OvernightRequestPage extends StatefulWidget {
-  const OvernightRequestPage({super.key, required this.finalVisitor, bool isOvernight = false}) : _isOvernight = isOvernight ;
+  const OvernightRequestPage({super.key, required this.finalVisitor});
   final Visitor finalVisitor;
-  final bool _isOvernight;
 
   @override
   State<OvernightRequestPage> createState() => _OvernightRequestPageState();
