@@ -29,7 +29,6 @@ class MainFormField extends StatelessWidget {
         decoration: InputDecoration(
           label: Text(hintText) ,
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
-
       ),
     );
   }

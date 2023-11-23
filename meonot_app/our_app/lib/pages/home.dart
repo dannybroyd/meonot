@@ -68,8 +68,8 @@ class _HomePageState extends State<HomePage> {
             child: Center(child: Text("בחר את נושא הפנייה:",
             style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),)),
           ),
-          MainButton(task: "לינה", routeName: '/sleeppage',),
           MainButton(task: "מבקרים", routeName: '/visitorpage',),
+          MainButton(task: "לינה", routeName: '/sleeppage',),
           MainButton(task: "תחזוקה", routeName: '/maintenancepage'),
           MainButton(task: "אתר המעונות", routeName: "https://meonot.shikunbinui.com/", link: true)
         ]),

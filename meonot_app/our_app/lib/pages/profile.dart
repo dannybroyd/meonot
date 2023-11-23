@@ -79,7 +79,7 @@ class _ProfileFormState extends State<ProfilePage> {
               keyboardType: TextInputType.number,
               validator:(val){return ourValidator(validNumber, val, " מספר הדירה אינו תקין ");}
             ),
-             const SizedBox(height: 30,),
+            const SizedBox(height: 30,),
             ElevatedButton(
               onPressed: (){
               setState(() {   

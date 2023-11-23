@@ -37,26 +37,29 @@ class _AddVisitorPageState extends State<AddVisitorPage> {
                 keyboardType: TextInputType.phone,
                 ),
                 const MainCheckBox(name: "checkBox", title: Text("הוספה למועדפים", style:TextStyle(fontSize: 16))),
-                ElevatedButton(onPressed: ()
-                {
-                  setState(() {
-                    if(_formKey1.currentState!.validate()){
-                      final newVisitor = Visitor(
-                          id: _formKey1.currentState!.fields['id']!.value,
-                          name: _formKey1.currentState!.fields['name']!.value, 
-                          phone: _formKey1.currentState!.fields['phone']!.value);
-                      if(_formKey1.currentState!.fields['checkBox']!.value){
-                        // if you want to add to favorites
-                          myProfile.visitors.add(newVisitor);
-                          myProfile.updateVisitors();
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("פרטי האורח נשמרו")));
-                          }
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => RequestPage(finalVisitor: newVisitor),));
-                      }
-                  });
-                },
-                style: ButtonStyle(shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)))), 
-                child: const Text("שמור והמשך"))
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: ElevatedButton(onPressed: ()
+                  {
+                    setState(() {
+                      if(_formKey1.currentState!.validate()){
+                        final newVisitor = Visitor(
+                            id: _formKey1.currentState!.fields['id']!.value,
+                            name: _formKey1.currentState!.fields['name']!.value, 
+                            phone: _formKey1.currentState!.fields['phone']!.value);
+                        if(_formKey1.currentState!.fields['checkBox']!.value){
+                          // if you want to add to favorites
+                            myProfile.visitors.add(newVisitor);
+                            myProfile.updateVisitors();
+                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("פרטי האורח נשמרו")));
+                            }
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => OvernightRequestPage(finalVisitor: newVisitor),));
+                        }
+                    });
+                  },
+                  style: ButtonStyle(shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)))), 
+                  child: const Text("שמור והמשך")),
+                )
               ],
             )),
         )
