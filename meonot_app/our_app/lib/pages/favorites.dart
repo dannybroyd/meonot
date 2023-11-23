@@ -1,20 +1,27 @@
 import 'package:our_app/util/resources/importss.dart';
 
-class SleepPage extends StatefulWidget {
-  const SleepPage({super.key});
+class FavoritesPage extends StatefulWidget {
+  const FavoritesPage({super.key, bool isOvernight = true}) : _isOvernight = isOvernight;
+  final bool _isOvernight;
   
+  String textForAppbar(){
+    if (_isOvernight){
+      return "פנייה בנושא לינה";
+    }
+    return "פנייה בנושא מבקרים";
+  }
 
   @override
-  State<SleepPage> createState() => _SleepPageState();
+  State<FavoritesPage> createState() => _FavoritesPageState();
 }
 
-class _SleepPageState extends State<SleepPage> {
+class _FavoritesPageState extends State<FavoritesPage> {
   @override
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        appBar: const MyAppBar(text: "פנייה בנושא לינה", middle: true,),
+        appBar: MyAppBar(text: widget.textForAppbar(), middle: true,),
         floatingActionButton: SizedBox(
           width: 170,
           height: 56,
@@ -53,7 +60,8 @@ class _SleepPageState extends State<SleepPage> {
                 itemCount: myProfile.visitors.length,
                 itemBuilder: (BuildContext context, int index) {
                   return VisitorTile(
-                    savedVisitor: myProfile.visitors[index]);
+                    savedVisitor: myProfile.visitors[index],
+                    isOvernight: widget._isOvernight,);
                 },
               ),
             ),
