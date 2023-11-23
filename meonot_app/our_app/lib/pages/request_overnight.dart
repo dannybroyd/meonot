@@ -16,10 +16,13 @@ class _OvernightRequestPageState extends State<OvernightRequestPage> {
       child: Scaffold(
         appBar: const MyAppBar(text: "בחר תאריך", middle: true,),
         body: 
-        ListView(children: const [
-          DatePicker(name: "entranceDate", hintText: "תאריך כניסה"),
-          DatePicker(name: "leaveDate", hintText: "תאריך יציאה", leave: true),
-          ]),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ListView(children: const [
+            DatePicker(name: "entranceDate", hintText: "תאריך כניסה"),
+            DatePicker(name: "leaveDate", hintText: "תאריך יציאה", leave: true),
+            ]),
+        ),
       ),
     );
   }

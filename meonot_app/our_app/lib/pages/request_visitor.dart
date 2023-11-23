@@ -11,10 +11,17 @@ class VisitorRequestPage extends StatefulWidget {
 class _VisitorRequestPageState extends State<VisitorRequestPage> {
   @override
   Widget build(BuildContext context) {
-    return const Directionality(
+    return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        appBar: MyAppBar(text: "בחר תאריך", middle: true,),
+        appBar: const MyAppBar(text: "בחר תאריך", middle: true,),
+        body: 
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ListView(children: const [
+            DatePicker(name: "entranceDate", hintText: "תאריך כניסה"),
+            ]),
+        ),
       ),
     );
   }
