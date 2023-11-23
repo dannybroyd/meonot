@@ -44,21 +44,22 @@ class _AddVisitorPageState extends State<AddVisitorPage> {
                   {
                     setState(() {
                       if(_formKey1.currentState!.validate()){
-                        final newVisitor = Visitor(
+                        final savedVisitor = Visitor(
                             id: _formKey1.currentState!.fields['id']!.value,
                             name: _formKey1.currentState!.fields['name']!.value, 
                             phone: _formKey1.currentState!.fields['phone']!.value);
                         if(_formKey1.currentState!.fields['checkBox']!.value){
                           // if you want to add to favorites
-                            myProfile.visitors.add(newVisitor);
+                            myProfile.visitors.add(savedVisitor);
                             myProfile.updateVisitors();
                             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("פרטי האורח נשמרו")));
                             }
                             if(widget._isOvernight){
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => OvernightRequestPage(finalVisitor: newVisitor),));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => OvernightRequestPage(finalVisitor: savedVisitor),));
                             }
                             else{
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => VisitorRequestPage(finalVisitor: newVisitor),));
+                              visitors.add(savedVisitor);
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => VisitorRequestPage(finalVisitor: savedVisitor),));
                             }
                         }
                     });

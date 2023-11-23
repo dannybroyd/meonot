@@ -14,6 +14,7 @@ class VisitorTile extends StatelessWidget {
           Navigator.push(context, MaterialPageRoute(builder: (context) => OvernightRequestPage(finalVisitor: savedVisitor),));
         }
         else{
+          visitors.add(savedVisitor);
           Navigator.push(context, MaterialPageRoute(builder: (context) => VisitorRequestPage(finalVisitor: savedVisitor),));
         }
       },

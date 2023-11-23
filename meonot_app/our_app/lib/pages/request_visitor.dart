@@ -18,8 +18,10 @@ class _VisitorRequestPageState extends State<VisitorRequestPage> {
         body: 
         Padding(
           padding: const EdgeInsets.all(16.0),
-          child: ListView(children: const [
-            DatePicker(name: "entranceDate", hintText: "תאריך כניסה"),
+          child: ListView(children: [
+            const DatePicker(name: "entranceDate", hintText: "תאריך כניסה"),
+            Text(visitors.toString()),
+
             ]),
         ),
       ),
