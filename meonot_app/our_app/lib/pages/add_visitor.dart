@@ -1,7 +1,8 @@
 import 'package:our_app/util/resources/importss.dart';
 
 class AddVisitorPage extends StatefulWidget {
-  const AddVisitorPage({super.key});
+  const AddVisitorPage({super.key, bool isOvernight = true}) : _isOvernight = isOvernight ;
+  final bool _isOvernight;
 
   @override
   State<AddVisitorPage> createState() => _AddVisitorPageState();
@@ -53,7 +54,12 @@ class _AddVisitorPageState extends State<AddVisitorPage> {
                             myProfile.updateVisitors();
                             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("פרטי האורח נשמרו")));
                             }
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => OvernightRequestPage(finalVisitor: newVisitor),));
+                            if(widget._isOvernight){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => OvernightRequestPage(finalVisitor: newVisitor),));
+                            }
+                            else{
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => VisitorRequestPage(finalVisitor: newVisitor),));
+                            }
                         }
                     });
                   },
