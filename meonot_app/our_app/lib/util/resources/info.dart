@@ -17,3 +17,39 @@ String? ourValidator(RegExp r,String? val, String text ){
   return null;
 }
 
+Future<bool> leaveProgress(context, bool removeAll) async{
+  // warn user before he leaves page and loses progress
+  final value = await showDialog<bool>(
+    context: context,
+    builder: (context) {
+      return Directionality(
+        textDirection: TextDirection.rtl,
+        child: AlertDialog(
+          content: const Text('אם תצאו, נתוני המבקרים ימחקו, האם תרצו לצאת?'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('לא'),
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+            ),
+            TextButton(
+              child: const Text('כן, תצא'),
+              onPressed: () {
+                if (removeAll){
+                  visitors = [];
+                }
+                else{
+                  visitors.removeLast();
+                }
+                Navigator.of(context).pop(true);
+              },
+            ),
+          ],
+        ),
+      );
+    }
+  );
+  return Future.value(value);
+}
+

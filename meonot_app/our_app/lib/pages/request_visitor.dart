@@ -6,7 +6,15 @@ class VisitorRequestPage extends StatefulWidget {
 
   @override
   State<VisitorRequestPage> createState() => _VisitorRequestPageState();
-}
+
+  String printNames(){
+    String result = '';
+    for(Visitor visitor in visitors){
+      result += '${visitor.name}, ';
+    }
+    return result;
+  }
+  }
 
 class _VisitorRequestPageState extends State<VisitorRequestPage> {
   @override
@@ -20,8 +28,7 @@ class _VisitorRequestPageState extends State<VisitorRequestPage> {
           padding: const EdgeInsets.all(16.0),
           child: ListView(children: [
             const DatePicker(name: "entranceDate", hintText: "תאריך כניסה"),
-            Text(visitors.toString()),
-
+            Text(widget.printNames()),
             ]),
         ),
       ),
