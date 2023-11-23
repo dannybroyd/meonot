@@ -6,7 +6,8 @@ class MainButton extends StatelessWidget {
   final String task;
   final String routeName;
   final bool link;
-  const MainButton({super.key, required this.task, required this.routeName, this.link = false});
+  final bool isOvernight;
+  const MainButton({super.key, required this.task, required this.routeName, this.link = false, this.isOvernight = true});
   //launch url for dorm site
   _launchURLBrowser() async {
   if (await canLaunchUrl(Uri.parse(routeName))) {
@@ -26,8 +27,12 @@ class MainButton extends StatelessWidget {
             // if the button is a link
             _launchURLBrowser();
           }
+          else if(isOvernight){
+            Navigator.pushNamed(context, routeName);
+          }
           else{
-          Navigator.pushNamed(context, routeName);
+            // if pressed on mevakrim
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const FavoritesPage(isOvernight: false,)));
           }
          },
         child: Container(
