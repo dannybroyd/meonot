@@ -20,16 +20,30 @@ class _VisitorRequestPageState extends State<VisitorRequestPage> {
   @override
   Widget build(BuildContext context) {
     return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Scaffold(
-        appBar: const MyAppBar(text: "בחר תאריך", middle: true,),
-        body: 
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: ListView(children: [
-            const DatePicker(name: "entranceDate", hintText: "תאריך כניסה"),
-            Text(widget.printNames()),
-            ]),
+      textDirection: TextDirection.rtl,  
+      child: WillPopScope(
+        onWillPop: () async {
+          Future<bool> temp = Future<bool>.value(false);
+          setState(() {
+            temp = leaveProgress(context, false);
+          });
+          return temp;
+        },
+        child: Scaffold(
+          appBar: const MyAppBar(text: "בחר תאריך", middle: true,),
+          floatingActionButton: BottomButton(
+            onPressed: (){},             //TODO ADD ON PRESSED
+            label: "שליחת בקשה",
+            icon: const Icon(Icons.send),
+          ),
+          body: 
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ListView(children: [
+              const DatePicker(name: "entranceDate", hintText: "תאריך כניסה"),
+              Text(widget.printNames()),
+              ]),
+          ),
         ),
       ),
     );

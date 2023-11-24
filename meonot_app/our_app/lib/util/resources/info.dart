@@ -16,7 +16,12 @@ String? ourValidator(RegExp r,String? val, String text ){
   }
   return null;
 }
-
+Widget message(bool deleteAll){
+  if(deleteAll){
+    return const Text('אם תצאו, נתוני המבקרים ימחקו, האם תרצו לצאת?');
+  }
+  return const Text('אם תצאו, נתוני המבקר האחרון ימחקו, האם תרצו לצאת?');
+}
 Future<bool> leaveProgress(context, bool removeAll) async{
   // warn user before he leaves page and loses progress
   final value = await showDialog<bool>(
@@ -25,7 +30,7 @@ Future<bool> leaveProgress(context, bool removeAll) async{
       return Directionality(
         textDirection: TextDirection.rtl,
         child: AlertDialog(
-          content: const Text('אם תצאו, נתוני המבקרים ימחקו, האם תרצו לצאת?'),
+          content: message(removeAll),
           actions: <Widget>[
             TextButton(
               child: const Text('לא'),

@@ -22,3 +22,5 @@ export 'package:hive/hive.dart';
 export 'package:our_app/data/database.dart';
 export 'package:shared_preferences/shared_preferences.dart';
 export 'package:our_app/util/check_box.dart';
+export 'package:our_app/util/bottom_left_button.dart';
+export 'package:our_app/pages/add_visitor.dart';

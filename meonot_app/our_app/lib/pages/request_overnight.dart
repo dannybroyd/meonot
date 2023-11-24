@@ -15,6 +15,11 @@ class _OvernightRequestPageState extends State<OvernightRequestPage> {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         appBar: const MyAppBar(text: "בחר תאריך", middle: true,),
+        floatingActionButton: BottomButton(
+            onPressed: (){},          //TODO ADD ON PRESSED
+            label: "שליחת בקשה",
+            icon: const Icon(Icons.send),
+          ),
         body: 
         Padding(
           padding: const EdgeInsets.all(16.0),
