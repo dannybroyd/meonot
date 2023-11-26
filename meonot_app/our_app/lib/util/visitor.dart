@@ -19,6 +19,9 @@ class Visitor {
     required this.phone,
   });
 
+  String getInitials() => name.isNotEmpty
+    ? name.trim().split(RegExp(' +')).map((s) => s[0]).take(2).join(): '';
+
   @override
   String toString() {
     return "id: $id, name: $name, phone: $phone";

@@ -22,7 +22,6 @@ class VisitorTile extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
         child: Container(
           decoration: BoxDecoration(
-            color: MyApp.mainColor,
             borderRadius: BorderRadius.circular(12),
           ),
           child: Padding(

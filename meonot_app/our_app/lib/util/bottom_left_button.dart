@@ -18,7 +18,6 @@ final Icon icon;
                 style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               icon: icon,
-              backgroundColor: MyApp.mainColor,
             ),)
           ;
   }

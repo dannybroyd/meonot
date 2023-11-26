@@ -33,6 +33,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      elevation: 4,
       centerTitle: middle,
       toolbarHeight: 80,
       title: Padding(

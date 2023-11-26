@@ -37,7 +37,7 @@ class MainButton extends StatelessWidget {
          },
         child: Container(
           decoration: BoxDecoration(
-            color: MyApp.mainColor,
+            color: Theme.of(context).colorScheme.primaryContainer,
             borderRadius: BorderRadius.circular(12)
           ),
           child: Padding(
