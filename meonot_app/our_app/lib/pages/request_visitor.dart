@@ -1,5 +1,5 @@
 import 'package:our_app/util/resources/importss.dart';
-
+import 'package:http/http.dart' as http;
 class VisitorRequestPage extends StatefulWidget {
   const VisitorRequestPage({super.key, required this.finalVisitor});
   final Visitor finalVisitor;
@@ -32,7 +32,14 @@ class _VisitorRequestPageState extends State<VisitorRequestPage> {
         child: Scaffold(
           appBar: const MyAppBar(text: "בחר תאריך", middle: true,),
           floatingActionButton: BottomButton(
-            onPressed: (){},             //TODO ADD ON PRESSED
+            onPressed: () async { 
+                http.Response response = await http.post(
+                Uri.parse(siteUrl),         // url is in info Page
+                body:makeDict("visitors"),     // function is in resources/info 
+              );
+              visitors.clear();
+            },          
+            //TODO: add button redirection
             label: "שליחת בקשה",
             icon: const Icon(Icons.send),
           ),
