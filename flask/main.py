@@ -1,3 +1,5 @@
+import time
+
 from flask import Flask, Response, request, send_file
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -5,7 +7,6 @@ from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
-import time
 # THIS CODE IS IN PYTHON!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ALSO CLOSE DRIVER AND DELETE FROM MAP AFTER CAPTCHA
 app = Flask(__name__)
 
@@ -25,8 +26,10 @@ def hello():
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=option)
     driver.get("https://meonot.shikunbinui.com")
     driver.maximize_window()
-    userDriver[request_data["id"]] = driver
+    userDriver[request_data["user_id"]] = driver
     senditmeonot(request_data, driver)
+    time.sleep(2)
+    return find_captcha(driver)
 
 
 def senditmeonot(request_data, driver):
@@ -42,17 +45,17 @@ def senditmeonot(request_data, driver):
             select_from_drop_value("DropDownFaultCategory", "VISITORS", driver)
             sleep(request_data, driver)
         case "visitors":
-            print("TODO!")
-            # TODO
+            select_from_drop_value("DropDownFaultCategory", "GUESTS", driver)
+            visitors(request_data, driver)
         case "maintenance":
             print("TODO!")
             # TODO
-    element_insert("CaptchaCodeTextBox", find_captcha(driver), driver)
+    # element_insert("CaptchaCodeTextBox", find_captcha(driver), driver)
 
 
 def sleep(request_data, driver):
     # initialise all simple elements
-    element_insert("ID_TB", id, driver)
+    element_insert("ID_TB", request_data["user_id"], driver)
     element_insert("GuestID_TB", request_data["guest_id"], driver)
     element_insert("GuestName_TB", request_data["guest_name"], driver)
     element_insert("GuestPhone_TB", request_data["guest_phone"], driver)
@@ -60,6 +63,22 @@ def sleep(request_data, driver):
     choose_date(request_data["entrance_month"], request_data["entrance_day"], "EntranceDate_TB", driver)
     # choose leave date
     choose_date(request_data["leave_month"], request_data["leave_day"], "LeaveDate_TB", driver)
+
+
+def visitors(request_data, driver):
+    # initialise all simple elements
+    element_insert("ID_TB", request_data["user_id"], driver)
+    element_insert("GuestID_TB", request_data.get("guest_id", ""), driver)
+    element_insert("GuestName_TB", request_data.get("guest_name", ""), driver)
+    element_insert("GuestPhone_TB", request_data.get("guest_phone", ""), driver)
+    element_insert("Guest2ID_TB", request_data.get("guest2_id", ""), driver)
+    element_insert("Guest2Name_TB", request_data.get("guest2_name", ""), driver)
+    element_insert("Guest2Phone_TB", request_data.get("guest2_phone", ""), driver)
+    element_insert("Guest3ID_TB", request_data.get("guest3_id", ""), driver)
+    element_insert("Guest3Name_TB", request_data.get("guest3_name", ""), driver)
+    element_insert("Guest3Phone_TB", request_data.get("guest3_phone", ""), driver)
+    # choose entrance date
+    choose_date(request_data["entrance_month"], request_data["entrance_day"], "EntranceDate_TB", driver)
 
 
 def choose_date(month, day, name, driver):
