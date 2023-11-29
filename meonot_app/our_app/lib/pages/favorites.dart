@@ -21,7 +21,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
-      child: WillPopScope(            //TODO CHANGE TO POPSCOPE?
+      child: WillPopScope(            // TODO: CHANGE TO POPSCOPE?
         onWillPop: () async {
           Future<bool> temp = Future<bool>.value(false);
           setState(() {
