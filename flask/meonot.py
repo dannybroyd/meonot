@@ -1,36 +1,24 @@
-import time
-
-from flask import Flask, Response, request, send_file
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 # THIS CODE IS IN PYTHON!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ALSO CLOSE DRIVER AND DELETE FROM MAP AFTER CAPTCHA
-app = Flask(__name__)
-
-option = Options()
-option.add_argument("--no-sandbox")
-option.add_argument("--headless")
-option.add_argument("--disable-gpu")
-userDriver = {}
 
 
-@app.route('/safsafsafa')
-def getdata():
-    return "hi"
-
-
-@app.route('/', methods=['POST'])
-def hello():
-    request_data = request.form
-    driver = webdriver.Chrome(options = option)
+def main(event, context):
+    options = Options()
+    service = Service(r"/opt/chromedriver")
+    options.binary_location = '/opt/headless-chromium'
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--single-process')
+    options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome(service=service, options=options)
+    request_data = event
     driver.get("https://meonot.shikunbinui.com")
     driver.maximize_window()
-    userDriver[request_data["user_id"]] = driver
     senditmeonot(request_data, driver)
-    time.sleep(2)
     return find_captcha(driver)
 
 
@@ -177,7 +165,4 @@ def find_captcha(driver):
         """, temp)
     return img_captcha_base64[1:]
 
-
-if __name__ == '__main__':
-    app.run(debug=False)
 
