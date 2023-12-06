@@ -9,7 +9,7 @@ class UserData{
   String building = '';
   String floor = '';
   String appartment = '';
-  List visitors = [];
+  List favorites = [];
 
   void createInitialData(){
     //?
@@ -24,7 +24,7 @@ class UserData{
     floor = _myBox.get('floor');
     appartment = _myBox.get('appartment');
     if(_myBox.get('visitors') != null){
-      visitors = _myBox.get('visitors');
+      favorites = _myBox.get('visitors');
     }
   }
 
@@ -33,6 +33,6 @@ class UserData{
   }
 
   void updateVisitors(){
-    _myBox.put('visitors', visitors);
+    _myBox.put('visitors', favorites);
   }
 }

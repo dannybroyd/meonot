@@ -64,9 +64,9 @@ class _FavoritesPageState extends State<FavoritesPage> {
               ),
               Expanded(
                 child: ListView.builder(
-                  itemCount: myProfile.visitors.length,
+                  itemCount: myProfile.favorites.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return VisitorTileTest(savedVisitor: myProfile.visitors[index],
+                    return VisitorTileTest(savedVisitor: myProfile.favorites[index],
                     isOverNight: widget._isOvernight,);
                     // return VisitorTile(
                     //   savedVisitor: myProfile.visitors[index],

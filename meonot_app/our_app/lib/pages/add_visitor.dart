@@ -50,7 +50,7 @@ class _AddVisitorPageState extends State<AddVisitorPage> {
                             phone: _formKey1.currentState!.fields['phone']!.value);
                         if(_formKey1.currentState!.fields['checkBox']!.value){
                           // if you want to add to favorites
-                            myProfile.visitors.add(savedVisitor);
+                            myProfile.favorites.add(savedVisitor);
                             myProfile.updateVisitors();
                             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("פרטי האורח נשמרו")));
                             }
