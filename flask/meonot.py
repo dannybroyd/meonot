@@ -30,16 +30,15 @@ def senditmeonot(request_data, driver):
     select_from_drop_text("DropDownBuilding", request_data["building"], driver)
     select_from_drop_text("DropDownFloor", request_data["floor"], driver)
     select_from_drop_text("DropDownUnit", request_data["unit"], driver)
-    match request_data["category"]:
-        case "sleep":
-            select_from_drop_value("DropDownFaultCategory", "VISITORS", driver)
-            sleep(request_data, driver)
-        case "visitors":
-            select_from_drop_value("DropDownFaultCategory", "GUESTS", driver)
-            visitors(request_data, driver)
-        case "maintenance":
-            print("TODO!")
-            # TODO
+    if request_data["category"] == "sleep":
+        select_from_drop_value("DropDownFaultCategory", "VISITORS", driver)
+        sleep(request_data, driver)
+    elif request_data["category"] == "visitors":
+        select_from_drop_value("DropDownFaultCategory", "GUESTS", driver)
+        visitors(request_data, driver)
+    elif request_data["category"] == "maintenance":
+        print("TODO!")
+        # TODO
     # element_insert("CaptchaCodeTextBox", find_captcha(driver), driver)
 
 
