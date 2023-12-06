@@ -8,18 +8,21 @@ from selenium.webdriver.support.ui import Select
 
 def main(event, context):
     options = Options()
-    service = Service(r"/opt/chromedriver")
     options.binary_location = '/opt/headless-chromium'
     options.add_argument('--headless')
     options.add_argument('--no-sandbox')
     options.add_argument('--single-process')
     options.add_argument('--disable-dev-shm-usage')
-    driver = webdriver.Chrome(service=service, options=options)
+    driver = webdriver.Chrome('/opt/chromedriver', chrome_options=options)
     request_data = event
     driver.get("https://meonot.shikunbinui.com")
-    driver.maximize_window()
     senditmeonot(request_data, driver)
-    return find_captcha(driver)
+    captcha = find_captcha(driver)
+    driver.close()
+    driver.quit()
+    return {
+        "captcha": captcha
+    }
 
 
 def senditmeonot(request_data, driver):
