@@ -1,3 +1,4 @@
+import 'package:our_app/pages/webview.dart';
 import 'package:our_app/util/resources/importss.dart';
 
 
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
         '/maintenancepage' :(context) => const MaintenancePage(),
         '/addvisitorpage' :(context) => const AddVisitorPage(),
         '/homepage' :(context) => const HomePage(),
+        '/webpage' :(context) => const WebViewPage(),
       },
       theme: theme
     );

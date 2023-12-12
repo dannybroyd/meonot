@@ -16,16 +16,7 @@ class _OvernightRequestPageState extends State<OvernightRequestPage> {
       child: Scaffold(
         appBar: const MyAppBar(text: "בחר תאריך", middle: true,),
         floatingActionButton: BottomButton(
-            onPressed: () async { 
-                http.Response response = await http.post(
-                Uri.parse(siteUrl),         // url is in info Page
-                body:makeDict("sleep"),     // function is in resources/info 
-              );
-              print(makeDict("sleep"));
-              print(response.body);
-              visitors.clear();   
-            },          
-            //TODO: add button redirection
+            onPressed: (){Navigator.pushNamed(context, '/webpage');},         
             label: "שליחת בקשה",
             icon: const Icon(Icons.send),
           ),

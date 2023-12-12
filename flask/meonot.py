@@ -13,8 +13,6 @@ def main(event, context):
     options.add_argument('--no-sandbox')
     options.add_argument('--single-process')
     options.add_argument('--disable-dev-shm-usage')
-    options.add_argument('--ignore-certificate-errors')
-    options.add_argument('--allow-running-insecure-content')
     driver = webdriver.Chrome('/opt/chromedriver', chrome_options=options)
     request_data = event
     driver.get("https://meonot.shikunbinui.com")

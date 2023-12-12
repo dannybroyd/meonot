@@ -11,6 +11,7 @@ import time
 option = Options()
 option.add_experimental_option("detach", True)
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=option)
+
 driver.get("https://meonot.shikunbinui.com/?AspxAutoDetectCookieSupport=1/")
 driver.maximize_window()
 
