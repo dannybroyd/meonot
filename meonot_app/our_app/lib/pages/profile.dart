@@ -10,7 +10,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfileFormState extends State<ProfilePage> {
   final _formKey = GlobalKey<FormBuilderState>();
   String e = "einstein";
-  String b= "broshim";
+  String b = "broshim";
   List<String> all_buildings = ["A","B","C","D","E","F","G","H","I","J","K"];
   List<String> all_floors = ["-1","0","1","2","3","4","5","6","7","8","9","10","11", "12","13","14","15","G","ROOF"];
 
