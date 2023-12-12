@@ -1,8 +1,7 @@
 import 'package:our_app/util/resources/importss.dart';
 
 class WebViewPage extends StatefulWidget {
-  const WebViewPage({super.key, required this.finalVisitor, required this.isOverNight});
-  final Visitor finalVisitor;
+  const WebViewPage({super.key, required this.isOverNight});
   final bool isOverNight;
 
   @override
@@ -37,16 +36,13 @@ void _fillOutNight(WebViewController controller){
 
 void _fillOutProfile(WebViewController controller){
   controller.runJavascript("document.getElementById('FullName').value='${myProfile.name}'");
-<<<<<<< HEAD
-}
-void _fillOutDay(WebViewController controller){
-  controller.runJavascript("document.getElementById('ID_TB').value='${myProfile.id}'");
-  controller.runJavascript("document.getElementById('EntranceDate_TB').value='$entranceDate'");
-=======
   controller.runJavascript("document.getElementById('Phone').value='${myProfile.phone}'");
   controller.runJavascript("document.getElementById('DormDropDown').value='${myProfile.dorms}'");
   controller.runJavascript("document.getElementById('DropDownBuilding').value='${myProfile.building}'");
   controller.runJavascript("document.getElementById('DropDownFloor').value='${myProfile.floor}'");
   controller.runJavascript("document.getElementById('DropDownUnit').value='${myProfile.appartment}'");
->>>>>>> 113c9b5d4c68caf26ec67935288594ce1584a1ba
+}
+void _fillOutDay(WebViewController controller){
+  controller.runJavascript("document.getElementById('ID_TB').value='${myProfile.id}'");
+  controller.runJavascript("document.getElementById('EntranceDate_TB').value='$entranceDate'");
 }

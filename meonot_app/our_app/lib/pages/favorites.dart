@@ -1,5 +1,5 @@
 import 'package:our_app/util/resources/importss.dart';
-import 'package:our_app/util/visitor_tile_test.dart';
+import 'package:our_app/util/visitor_tile.dart';
 
 class FavoritesPage extends StatefulWidget {
   const FavoritesPage({super.key, bool isOvernight = true}) : _isOvernight = isOvernight;
@@ -66,7 +66,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                 child: ListView.builder(
                   itemCount: myProfile.favorites.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return VisitorTileTest(savedVisitor: myProfile.favorites[index],
+                    return VisitorTile(savedVisitor: myProfile.favorites[index],
                     isOverNight: widget._isOvernight,);
                     // return VisitorTile(
                     //   savedVisitor: myProfile.visitors[index],

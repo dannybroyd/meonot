@@ -12,7 +12,6 @@ export 'package:our_app/util/form_field.dart';
 export 'package:our_app/util/main_button.dart';
 export 'package:our_app/util/appbar.dart';
 export 'package:our_app/util/visitor.dart';
-export 'package:our_app/util/visitor_tile.dart';
 export 'package:our_app/main.dart';
 export 'package:flutter/services.dart';
 export 'package:url_launcher/url_launcher.dart';

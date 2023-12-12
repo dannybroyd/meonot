@@ -2,8 +2,7 @@ import 'package:our_app/pages/webview.dart';
 import 'package:our_app/util/resources/importss.dart';
 
 class OvernightRequestPage extends StatefulWidget {
-  const OvernightRequestPage({super.key, required this.finalVisitor});
-  final Visitor finalVisitor;
+  const OvernightRequestPage({super.key});
 
   @override
   State<OvernightRequestPage> createState() => _OvernightRequestPageState();
@@ -12,6 +11,7 @@ class OvernightRequestPage extends StatefulWidget {
 class _OvernightRequestPageState extends State<OvernightRequestPage> {
   final dateController = TextEditingController();
   final dateController2 = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -20,7 +20,7 @@ class _OvernightRequestPageState extends State<OvernightRequestPage> {
         appBar: const MyAppBar(text: "בחר תאריך", middle: true,),
         floatingActionButton: BottomButton(
             onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => WebViewPage(finalVisitor: widget.finalVisitor, isOverNight: true,),));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const WebViewPage(isOverNight: true,),));
             },         
             label: "שליחת בקשה",
             icon: const Icon(Icons.send),

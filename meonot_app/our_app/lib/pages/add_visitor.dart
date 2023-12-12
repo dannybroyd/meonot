@@ -53,13 +53,13 @@ class _AddVisitorPageState extends State<AddVisitorPage> {
                             myProfile.favorites.add(savedVisitor);
                             myProfile.updateVisitors();
                             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("פרטי האורח נשמרו")));
+                            visitors.add(savedVisitor);
                             }
                             if(widget._isOvernight){
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => OvernightRequestPage(finalVisitor: savedVisitor),));
+                              Navigator.pushNamed(context, '/overnightpage');
                             }
                             else{
-                              visitors.add(savedVisitor);
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => VisitorRequestPage(finalVisitor: savedVisitor),));
+                              Navigator.pushNamed(context, '/visitorpage');
                             }
                         }
                     });

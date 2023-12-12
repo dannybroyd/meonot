@@ -44,6 +44,8 @@ class MyApp extends StatelessWidget {
         '/maintenancepage' :(context) => const MaintenancePage(),
         '/addvisitorpage' :(context) => const AddVisitorPage(),
         '/homepage' :(context) => const HomePage(),
+        '/overnightpage' :(context) => const OvernightRequestPage(),
+        '/visitorpage' :(context) => const VisitorRequestPage(),
       },
       theme: theme
     );

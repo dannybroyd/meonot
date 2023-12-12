@@ -1,8 +1,6 @@
 import 'package:our_app/util/resources/importss.dart';
-import 'package:http/http.dart' as http;
 class VisitorRequestPage extends StatefulWidget {
-  const VisitorRequestPage({super.key, required this.finalVisitor});
-  final Visitor finalVisitor;
+  const VisitorRequestPage({super.key});
 
   @override
   State<VisitorRequestPage> createState() => _VisitorRequestPageState();

@@ -1,7 +1,7 @@
 import 'package:our_app/util/resources/importss.dart';
 
 class VisitorTile extends StatelessWidget {
-  const VisitorTile({super.key, required this.savedVisitor, bool isOvernight = true}) : _isOvernight = isOvernight;
+  const VisitorTile({super.key, required this.savedVisitor, isOverNight = true}) : _isOvernight = isOverNight;
   final Visitor savedVisitor;
   final bool _isOvernight;
 
@@ -9,29 +9,35 @@ class VisitorTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
+        visitors.add(savedVisitor);
         // goes to requestpage with info about savedvisitor
         if (_isOvernight){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => OvernightRequestPage(finalVisitor: savedVisitor),));
+          Navigator.pushNamed(context, '/overnightpage');
         }
         else{
-          visitors.add(savedVisitor);
-          Navigator.push(context, MaterialPageRoute(builder: (context) => VisitorRequestPage(finalVisitor: savedVisitor),));
+          Navigator.pushNamed(context, '/vistiorpage');
         }
       },
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(25),
-            child: Center(child: Text(savedVisitor.name,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 22
-            ),)),
-          ),
+        padding: const EdgeInsets.all(8.0),
+        child: ListTile(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          tileColor: Theme.of(context).colorScheme.surfaceVariant,
+          leading: CircleAvatar(
+            child: Text(
+              savedVisitor.getInitials(),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),),),
+          title: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(savedVisitor.name,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),),
+          )
         ),
       ),
     );
