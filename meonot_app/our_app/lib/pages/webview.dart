@@ -33,7 +33,6 @@ void _fillOutNight(WebViewController controller){
   _fillOutProfile(controller);
   controller.runJavascript("document.getElementById('DropDownFaultCategory').value='VISITORS'");
   controller.runJavascript("document.getElementById('ID_TB').value='${myProfile.id}'");
-  controller.runJavascript("document.getElementById('ID_TB').value='${myProfile.id}'");
 }
 
 void _fillOutProfile(WebViewController controller){
