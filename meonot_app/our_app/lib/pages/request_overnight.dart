@@ -1,5 +1,6 @@
+import 'package:our_app/pages/webview.dart';
 import 'package:our_app/util/resources/importss.dart';
-import 'package:http/http.dart' as http;
+
 class OvernightRequestPage extends StatefulWidget {
   const OvernightRequestPage({super.key, required this.finalVisitor});
   final Visitor finalVisitor;
@@ -18,7 +19,9 @@ class _OvernightRequestPageState extends State<OvernightRequestPage> {
       child: Scaffold(
         appBar: const MyAppBar(text: "בחר תאריך", middle: true,),
         floatingActionButton: BottomButton(
-            onPressed: (){Navigator.pushNamed(context, '/webpage');},         
+            onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => WebViewPage(finalVisitor: widget.finalVisitor, isOverNight: true,),));
+            },         
             label: "שליחת בקשה",
             icon: const Icon(Icons.send),
           ),
