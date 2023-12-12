@@ -15,7 +15,7 @@ class VisitorTile extends StatelessWidget {
           Navigator.pushNamed(context, '/overnightpage');
         }
         else{
-          Navigator.pushNamed(context, '/vistiorpage');
+          Navigator.pushNamed(context, '/visitorpage');
         }
       },
       child: Padding(

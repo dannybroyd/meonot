@@ -1,4 +1,3 @@
-import 'package:our_app/pages/webview.dart';
 import 'package:our_app/util/resources/importss.dart';
 
 class OvernightRequestPage extends StatefulWidget {
@@ -9,8 +8,8 @@ class OvernightRequestPage extends StatefulWidget {
 }
 
 class _OvernightRequestPageState extends State<OvernightRequestPage> {
-  final dateController = TextEditingController();
-  final dateController2 = TextEditingController();
+  final dateControllerEntrance = TextEditingController();
+  final dateControllerLeave = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +28,8 @@ class _OvernightRequestPageState extends State<OvernightRequestPage> {
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: ListView(children:  [
-            DatePicker(name: "entranceDate", hintText: "תאריך כניסה",controller: dateController,),
-            DatePicker(name: "leaveDate", hintText: "תאריך יציאה", leave: true, controller: dateController2,),
+            DatePicker(name: "entranceDate", hintText: "תאריך כניסה",controller: dateControllerEntrance,),
+            DatePicker(name: "leaveDate", hintText: "תאריך יציאה", leave: true, controller: dateControllerLeave,),
             ]),
         ),
       ),

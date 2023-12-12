@@ -21,7 +21,12 @@ class _WebViewPageState extends State<WebViewPage> {
           this.controller = controller;
         },
         onPageFinished: (siteUrl) {
-          _fillOutNight(controller);
+          if(widget.isOverNight){
+            _fillOutNight(controller);
+          }
+          else{
+            _fillOutDay(controller);
+          }
         }
       )
     );
@@ -29,9 +34,11 @@ class _WebViewPageState extends State<WebViewPage> {
 }
 
 void _fillOutNight(WebViewController controller){
-  _fillOutProfile(controller);
-  controller.runJavascript("document.getElementById('DropDownFaultCategory').value='VISITORS'");
-  controller.runJavascript("document.getElementById('ID_TB').value='${myProfile.id}'");
+  //_fillOutProfile(controller);
+  //controller.runJavascript("document.getElementById('DropDownFaultCategory').value='VISITORS'");
+  controller.runJavascript("document.getElementById('DropDownFaultCategory').options[פניות בנושא לינה]=true");
+  controller.runJavascript("document.getElementById('DropDownFaultCategory').onchange()'");
+  //controller.runJavascript("document.getElementById('ID_TB').value='${myProfile.id}'");
 }
 
 void _fillOutProfile(WebViewController controller){
@@ -42,7 +49,22 @@ void _fillOutProfile(WebViewController controller){
   controller.runJavascript("document.getElementById('DropDownFloor').value='${myProfile.floor}'");
   controller.runJavascript("document.getElementById('DropDownUnit').value='${myProfile.appartment}'");
 }
-void _fillOutDay(WebViewController controller){
+void _fillOutDay(WebViewController controller)async{
+  _fillOutProfile(controller);
+  await Future.delayed(const Duration(seconds: 1));
   controller.runJavascript("document.getElementById('ID_TB').value='${myProfile.id}'");
   controller.runJavascript("document.getElementById('EntranceDate_TB').value='$entranceDate'");
+  controller.runJavascript("document.getElementById('GuestID_TB').value='${visitors[0].id}'");
+  controller.runJavascript("document.getElementById('GuestName_TB').value='${visitors[0].name}'");
+  controller.runJavascript("document.getElementById('GuestPhone_TB').value='${visitors[0].phone}'");
+  if(visitors.length>1){
+  controller.runJavascript("document.getElementById('Guest2ID_TB').value='${visitors[1].id}'");
+  controller.runJavascript("document.getElementById('Guest2Name_TB').value='${visitors[1].name}'");
+  controller.runJavascript("document.getElementById('Guest2Phone_TB').value='${visitors[1].phone}'");
+  }
+  if(visitors.length==3){
+  controller.runJavascript("document.getElementById('Guest3ID_TB').value='${visitors[2].id}'");
+  controller.runJavascript("document.getElementById('Guest3Name_TB').value='${visitors[2].name}'");
+  controller.runJavascript("document.getElementById('Guest3Phone_TB').value='${visitors[2].phone}'");
+  }  
 }

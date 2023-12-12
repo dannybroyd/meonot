@@ -32,9 +32,9 @@ class _VisitorRequestPageState extends State<VisitorRequestPage> {
           appBar: const MyAppBar(text: "בחר תאריך", middle: true,),
           floatingActionButton: BottomButton(
             onPressed: (){
-              Navigator.pushNamed(context, '/webpage');
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const WebViewPage(isOverNight: false,),));
               entranceDate = dateController.text;
-              print(entranceDate);},       
+            },       
             label: "שליחת בקשה",
             icon: const Icon(Icons.send),
           ),
