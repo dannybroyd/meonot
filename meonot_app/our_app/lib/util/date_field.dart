@@ -6,8 +6,10 @@ class DatePicker extends StatefulWidget {
   final String hintText;
   final String? Function(String?)? validator;
   final bool leave;
+  final TextEditingController controller;
 
-  const DatePicker({super.key, required this.name, required this.hintText, this.validator, this.leave = false});
+
+  const DatePicker({super.key, required this.name, required this.hintText,required this.controller, this.validator, this.leave = false,});
 
   DateTime _defualtDate(){
     if (leave){
@@ -26,6 +28,7 @@ class _DatePickerState extends State<DatePicker> {
       padding: const EdgeInsets.all(16),
       child: FormBuilderDateTimePicker(
         format: DateFormat('dd/MM/yyyy'),
+        controller: widget.controller,
         name: widget.name,
         initialValue: widget._defualtDate(),
         firstDate: DateTime.now(),

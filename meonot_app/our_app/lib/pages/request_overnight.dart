@@ -9,6 +9,8 @@ class OvernightRequestPage extends StatefulWidget {
 }
 
 class _OvernightRequestPageState extends State<OvernightRequestPage> {
+  final dateController = TextEditingController();
+  final dateController2 = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -23,9 +25,9 @@ class _OvernightRequestPageState extends State<OvernightRequestPage> {
         body: 
         Padding(
           padding: const EdgeInsets.all(16.0),
-          child: ListView(children: const [
-            DatePicker(name: "entranceDate", hintText: "תאריך כניסה"),
-            DatePicker(name: "leaveDate", hintText: "תאריך יציאה", leave: true),
+          child: ListView(children:  [
+            DatePicker(name: "entranceDate", hintText: "תאריך כניסה",controller: dateController,),
+            DatePicker(name: "leaveDate", hintText: "תאריך יציאה", leave: true, controller: dateController2,),
             ]),
         ),
       ),

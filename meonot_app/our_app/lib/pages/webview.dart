@@ -30,3 +30,7 @@ class _WebViewPageState extends State<WebViewPage> {
 void _fillOutNight(WebViewController controller){
   controller.runJavascript("document.getElementById('FullName').value='${myProfile.name}'");
 }
+void _fillOutDay(WebViewController controller){
+  controller.runJavascript("document.getElementById('ID_TB').value='${myProfile.id}'");
+  controller.runJavascript("document.getElementById('EntranceDate_TB').value='$entranceDate'");
+}

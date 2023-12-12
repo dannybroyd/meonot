@@ -17,6 +17,7 @@ class VisitorRequestPage extends StatefulWidget {
   }
 
 class _VisitorRequestPageState extends State<VisitorRequestPage> {
+  final dateController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -32,14 +33,10 @@ class _VisitorRequestPageState extends State<VisitorRequestPage> {
         child: Scaffold(
           appBar: const MyAppBar(text: "בחר תאריך", middle: true,),
           floatingActionButton: BottomButton(
-            onPressed: () async { 
-                http.Response response = await http.post(
-                Uri.parse(siteUrl),         // url is in info Page
-                body:makeDict("visitors"),     // function is in resources/info 
-              );
-              visitors.clear();
-            },          
-            //TODO: add button redirection
+            onPressed: (){
+              Navigator.pushNamed(context, '/webpage');
+              entranceDate = dateController.text;
+              print(entranceDate);},       
             label: "שליחת בקשה",
             icon: const Icon(Icons.send),
           ),
@@ -47,7 +44,7 @@ class _VisitorRequestPageState extends State<VisitorRequestPage> {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: ListView(children: [
-              const DatePicker(name: "entranceDate", hintText: "תאריך כניסה"),
+              DatePicker(name: "entranceDate", hintText: "תאריך כניסה", controller: dateController,),
               Text(widget.printNames()),
               ]),
           ),
