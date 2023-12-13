@@ -20,6 +20,8 @@ class _OvernightRequestPageState extends State<OvernightRequestPage> {
         floatingActionButton: BottomButton(
             onPressed: (){
               Navigator.push(context, MaterialPageRoute(builder: (context) => const WebViewPage(isOverNight: true,),));
+              entranceDate = dateControllerEntrance.text;
+              leaveDate = dateControllerLeave.text;
             },         
             label: "שליחת בקשה",
             icon: const Icon(Icons.send),

@@ -3,7 +3,8 @@ import 'package:our_app/util/resources/importss.dart';
 UserData myProfile = UserData();
 final fieldListUser = ['name', 'phone', 'id', 'dorms', 'building', 'floor', 'appartment'];
 List visitors = [];         // current visitors
-String entranceDate="";
+String entranceDate= "";
+String leaveDate = "";
 
 //String siteUrl ="http://127.0.0.1:5000/";         // put url
 String siteUrl = "https://meonot.shikunbinui.com";
