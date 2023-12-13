@@ -11,10 +11,6 @@ class UserData{
   String appartment = '';
   List favorites = [];
 
-  void createInitialData(){
-    //?
-  }
-
   void loadData(){
     name = _myBox.get('name');
     phone = _myBox.get('phone');

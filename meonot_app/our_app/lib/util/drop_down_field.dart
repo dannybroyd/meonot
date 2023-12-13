@@ -1,7 +1,7 @@
 import 'package:our_app/util/resources/importss.dart';
 
-class DropDownF extends StatelessWidget {
-  const DropDownF({
+class DropDownField extends StatelessWidget {
+  const DropDownField({
     super.key, 
     required this.name,
     required this.hintText,

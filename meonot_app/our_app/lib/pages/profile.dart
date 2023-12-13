@@ -51,21 +51,21 @@ class _ProfileFormState extends State<ProfilePage> {
               keyboardType: TextInputType.phone,
               validator:(val){return ourValidator(validPhone, val, " מספר הטלפון אינו תקין ");}
             ),
-            DropDownF(
+            DropDownField(
               name: "meonot",
               hintText:"מעונות" ,
               initalValue: myProfile.dorms,
               validator: pickPlease,
               lst: const ["broshim", "einstein"],
               ),
-            DropDownF(
+            DropDownField(
               name: "building",
               hintText:"בניין" ,
               initalValue: myProfile.building,
               validator: pickPlease,
               lst: all_buildings,
               ),
-            DropDownF(
+            DropDownField(
               name: "floor",
               hintText:"קומה",
               initalValue: myProfile.floor,
