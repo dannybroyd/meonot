@@ -1,7 +1,7 @@
 import 'package:our_app/util/resources/importss.dart';
 
 class WebViewPage extends StatefulWidget {
-  const WebViewPage({super.key, required this.isOverNight});
+  const WebViewPage({super.key, required this.isOverNight,});
   final bool isOverNight;
 
   @override
@@ -59,9 +59,11 @@ void _fillOutProfile(WebViewController controller) async{
   _fillValidUnitsInWeb(controller, myProfile.appartment);
 }
 
-void _fillOutDay(WebViewController controller){
+void _fillOutDay(WebViewController controller)async{
   _fillOutProfile(controller);
+  await Future.delayed(const Duration(seconds: 1));
   _dropDownValueChange(controller, 'DropDownFaultCategory', 'GUESTS');
+  await Future.delayed(const Duration(seconds: 1));
   _elementValueChange(controller,'ID_TB', myProfile.id);
   _elementValueChange(controller,'EntranceDate_TB', entranceDate);
   _elementValueChange(controller, 'GuestID_TB', visitors[0].id);
