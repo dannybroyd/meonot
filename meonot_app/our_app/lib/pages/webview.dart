@@ -10,7 +10,7 @@ class WebViewPage extends StatefulWidget {
 
 class _WebViewPageState extends State<WebViewPage> {
   late WebViewController controller;
-
+  bool changed = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,11 +21,13 @@ class _WebViewPageState extends State<WebViewPage> {
           this.controller = controller;
         },
         onPageFinished: (siteUrl) {
-          if(widget.isOverNight){
+          if(widget.isOverNight && !changed){
             _fillOutNight(controller);
+            changed = true;
           }
-          else{
+          else if(!changed){
             _fillOutDay(controller);
+            changed = true;
           }
         }
       )
@@ -34,23 +36,24 @@ class _WebViewPageState extends State<WebViewPage> {
 }
 
 void _fillOutNight(WebViewController controller){
-  //_fillOutProfile(controller);
-  //controller.runJavascript("document.getElementById('DropDownFaultCategory').value='VISITORS'");
-  controller.runJavascript("document.getElementById('DropDownFaultCategory').options[פניות בנושא לינה]=true");
-  controller.runJavascript("document.getElementById('DropDownFaultCategory').onchange()'");
-  //controller.runJavascript("document.getElementById('ID_TB').value='${myProfile.id}'");
+  _fillOutProfile(controller);
+  controller.runJavascript("document.getElementById('DropDownFaultCategory').value='VISITORS'");
+  controller.runJavascript("document.getElementById('DropDownFaultCategory').onchange()");
+  controller.runJavascript("document.getElementById('ID_TB').value='${myProfile.id}'");
 }
 
 void _fillOutProfile(WebViewController controller){
   controller.runJavascript("document.getElementById('FullName').value='${myProfile.name}'");
-  controller.runJavascript("document.getElementById('Phone').value='${myProfile.phone}'");
-  controller.runJavascript("document.getElementById('DormDropDown').value='${myProfile.dorms}'");
-  controller.runJavascript("document.getElementById('DropDownBuilding').value='${myProfile.building}'");
-  controller.runJavascript("document.getElementById('DropDownFloor').value='${myProfile.floor}'");
-  controller.runJavascript("document.getElementById('DropDownUnit').value='${myProfile.appartment}'");
+  //controller.runJavascript("document.getElementById('Phone').value='${myProfile.phone}'");
+  //controller.runJavascript("document.getElementById('DormDropDown').value='${myProfile.dorms}'");
+  //controller.runJavascript("document.getElementById('DropDownBuilding').value='${myProfile.building}'");
+  //controller.runJavascript("document.getElementById('DropDownFloor').value='${myProfile.floor}'");
+  //controller.runJavascript("document.getElementById('DropDownUnit').value='${myProfile.appartment}'");
 }
 void _fillOutDay(WebViewController controller)async{
   _fillOutProfile(controller);
+  controller.runJavascript("document.getElementById('DropDownFaultCategory').value='GUESTS'");
+  controller.runJavascript("document.getElementById('DropDownFaultCategory').onchange()");
   await Future.delayed(const Duration(seconds: 1));
   controller.runJavascript("document.getElementById('ID_TB').value='${myProfile.id}'");
   controller.runJavascript("document.getElementById('EntranceDate_TB').value='$entranceDate'");
