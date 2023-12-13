@@ -26,7 +26,7 @@ Widget message(bool deleteAll){
   }
   return const Text('אם תצאו, נתוני המבקר האחרון ימחקו, האם תרצו לצאת?');
 }
-Future<bool> leaveProgress(context, bool removeAll) async{
+Future<bool> leaveProgress(context, bool removeAll, {bool goHomePage = false}) async{
   // warn user before he leaves page and loses progress
   final value = await showDialog<bool>(
     context: context,
@@ -51,7 +51,12 @@ Future<bool> leaveProgress(context, bool removeAll) async{
                 else{
                   visitors.removeLast();
                 }
+                if(goHomePage){       // only if in favorites and want to go back to home page
+                  Navigator.pushNamed(context, '/homepage');
+                }
+                else{ 
                 Navigator.of(context).pop(true);
+                }
               },
             ),
           ],

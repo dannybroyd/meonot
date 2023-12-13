@@ -44,6 +44,21 @@ class _VisitorRequestPageState extends State<VisitorRequestPage> {
             child: ListView(children: [
               DatePicker(name: "entranceDate", hintText: "תאריך כניסה", controller: dateController,),
               Text(widget.printNames()),
+              ElevatedButton(
+              onPressed: (){
+                if(visitors.length <=2){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const FavoritesPage(isOvernight: false,),));
+                }
+                else{
+                  showDialog(context: context, builder: (BuildContext context){
+                    return const AlertDialog(
+                      content: Text("הגעת למכסת המבקרים המקסימלית"),
+                    );
+                  });
+                }
+              },
+              style:ButtonStyle(shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)))),
+              child: const Text("הוספת מבקר נוסף"))
               ]),
           ),
         ),

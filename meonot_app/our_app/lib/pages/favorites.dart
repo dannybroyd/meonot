@@ -25,7 +25,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
         onWillPop: () async {
           Future<bool> temp = Future<bool>.value(false);
           setState(() {
-            temp = leaveProgress(context, true);
+            temp = leaveProgress(context, true, goHomePage: true);
           });
           return temp;
         },
