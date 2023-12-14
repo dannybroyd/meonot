@@ -89,7 +89,7 @@ void _elementValueChange(WebViewController controller, id, value){
 Future<void> _dropDownValueChange(WebViewController controller, id, value) async{
     await controller.runJavascript("document.getElementById('$id').value='$value'");
     await controller.runJavascript("document.getElementById('$id').onchange()");
-    await Future.delayed(const Duration(seconds: 1));
+    await Future.delayed(const Duration(milliseconds: 600));
   }
 
 Future<void> _fillValidUnitsInWeb(WebViewController controller, appartment) async{
@@ -104,7 +104,7 @@ Future<void> _fillValidUnitsInWeb(WebViewController controller, appartment) asyn
     }
     """);
   await controller.runJavascript("document.getElementById('DropDownUnit').onchange()");
-  await Future.delayed(const Duration(seconds: 1));
+  await Future.delayed(const Duration(milliseconds: 600));
 }
 
 String _validDorms(){
