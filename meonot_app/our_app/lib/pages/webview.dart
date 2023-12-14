@@ -1,13 +1,13 @@
 import 'package:our_app/util/resources/importss.dart';
 
 class WebViewPage extends StatefulWidget {
-  const WebViewPage({super.key, required this.isOverNight,});
+  const WebViewPage({super.key, required this.isOverNight,this.isMaintenance = false });
   final bool isOverNight;
+  final bool isMaintenance;
 
   @override
   State<WebViewPage> createState() => _WebViewPageState();
 }
-
 class _WebViewPageState extends State<WebViewPage> {
   late WebViewController controller;
   bool changed = false;
@@ -21,13 +21,16 @@ class _WebViewPageState extends State<WebViewPage> {
           this.controller = controller;
         },
         onPageFinished: (siteUrl) {
-          if(widget.isOverNight && !changed){
+          if(widget.isOverNight && !changed && widget.isMaintenance){
             _fillOutNight(controller);
             changed = true;
           }
-          else if(!changed){
+          else if(!changed && widget.isMaintenance){
             _fillOutDay(controller);
             changed = true;
+          }
+          else{     // maintenance
+            _fillOutProfile(controller);
           }
         }
       )
