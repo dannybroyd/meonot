@@ -20,17 +20,19 @@ class _WebViewPageState extends State<WebViewPage> {
         onWebViewCreated: (controller){
           this.controller = controller;
         },
-        onPageFinished: (siteUrl) {
-          if(widget.isOverNight && !changed && widget.isMaintenance){
-            _fillOutNight(controller);
+        onPageFinished: (siteUrl) async{
+          if(widget.isOverNight && !changed && !widget.isMaintenance){
             changed = true;
+            await _fillOutNight(controller);
+            controller.runJavascript('window.scrollTo(0, document.body.scrollHeight)');
           }
-          else if(!changed && widget.isMaintenance){
-            _fillOutDay(controller);
+          else if(!changed && !widget.isMaintenance){
             changed = true;
+            await _fillOutDay(controller);
+            controller.runJavascript('window.scrollTo(0, document.body.scrollHeight)');
           }
-          else{     // maintenance
-            _fillOutProfile(controller);
+          else if(widget.isMaintenance){     // maintenance
+            await _fillOutProfile(controller);
           }
         }
       )
@@ -38,10 +40,9 @@ class _WebViewPageState extends State<WebViewPage> {
   }
 }
 
-void _fillOutNight(WebViewController controller) async{
-  _fillOutProfile(controller);
-  _dropDownValueChange(controller, 'DropDownFaultCategory', 'VISITORS');
-  await Future.delayed(const Duration(seconds: 1));
+Future<void> _fillOutNight(WebViewController controller) async{
+  await _fillOutProfile(controller);
+  await _dropDownValueChange(controller, 'DropDownFaultCategory', 'VISITORS');
   _elementValueChange(controller, 'ID_TB', myProfile.id);
   _elementValueChange(controller,'EntranceDate_TB', entranceDate);
   _elementValueChange(controller,'LeaveDate_TB', leaveDate);
@@ -50,23 +51,19 @@ void _fillOutNight(WebViewController controller) async{
   _elementValueChange(controller, 'GuestPhone_TB', visitors[0].phone);
 }
 
-void _fillOutProfile(WebViewController controller) async{
+Future<void> _fillOutProfile(WebViewController controller) async{
   _elementValueChange(controller, 'FullName', myProfile.name);
   _elementValueChange(controller, 'Phone', myProfile.phone);
-  _dropDownValueChange(controller, 'DormDropDown', _validDorms());
+  await _dropDownValueChange(controller, 'DormDropDown', _validDorms());
+  await _dropDownValueChange(controller, 'DropDownBuilding', _validBuidling());
+  await _dropDownValueChange(controller, 'DropDownFloor', _validFloor());
+  await _fillValidUnitsInWeb(controller, myProfile.appartment);
   await Future.delayed(const Duration(seconds: 1));
-  _dropDownValueChange(controller, 'DropDownBuilding', _validBuidling());
-  await Future.delayed(const Duration(seconds: 1));
-  _dropDownValueChange(controller, 'DropDownFloor', _validFloor());
-  await Future.delayed(const Duration(seconds: 1));
-  _fillValidUnitsInWeb(controller, myProfile.appartment);
 }
 
-void _fillOutDay(WebViewController controller)async{
-  _fillOutProfile(controller);
-  await Future.delayed(const Duration(seconds: 1));
-  _dropDownValueChange(controller, 'DropDownFaultCategory', 'GUESTS');
-  await Future.delayed(const Duration(seconds: 1));
+Future<void> _fillOutDay(WebViewController controller) async{
+  await _fillOutProfile(controller);
+  await _dropDownValueChange(controller, 'DropDownFaultCategory', 'GUESTS');
   _elementValueChange(controller,'ID_TB', myProfile.id);
   _elementValueChange(controller,'EntranceDate_TB', entranceDate);
   _elementValueChange(controller, 'GuestID_TB', visitors[0].id);
@@ -81,21 +78,23 @@ void _fillOutDay(WebViewController controller)async{
   _elementValueChange(controller, 'Guest3ID_TB', visitors[2].id);
   _elementValueChange(controller, 'Guest3Name_TB', visitors[2].name);
   _elementValueChange(controller, 'Guest3Phone_TB', visitors[2].phone);
-  }  
+  }
+  await Future.delayed(const Duration(seconds: 1));  
 }
 
 void _elementValueChange(WebViewController controller, id, value){
     controller.runJavascript("document.getElementById('$id').value='$value'");
   }
 
-void _dropDownValueChange(WebViewController controller, id, value){
-    controller.runJavascript("document.getElementById('$id').value='$value'");
-    controller.runJavascript("document.getElementById('$id').onchange()");
+Future<void> _dropDownValueChange(WebViewController controller, id, value) async{
+    await controller.runJavascript("document.getElementById('$id').value='$value'");
+    await controller.runJavascript("document.getElementById('$id').onchange()");
+    await Future.delayed(const Duration(seconds: 1));
   }
 
-void _fillValidUnitsInWeb(WebViewController controller, appartment){
+Future<void> _fillValidUnitsInWeb(WebViewController controller, appartment) async{
   // js code to fill right value in web for dorm units
-  controller.runJavascript(
+  await controller.runJavascript(
     """var units = document.getElementById('DropDownUnit');
     var alloptions = units.getElementsByTagName('option');
     for (var i = 0; i < alloptions.length; i++){
@@ -104,7 +103,8 @@ void _fillValidUnitsInWeb(WebViewController controller, appartment){
       }
     }
     """);
-    controller.runJavascript("document.getElementById('DropDownUnit').onchange()");
+  await controller.runJavascript("document.getElementById('DropDownUnit').onchange()");
+  await Future.delayed(const Duration(seconds: 1));
 }
 
 String _validDorms(){
