@@ -5,6 +5,7 @@ final fieldListUser = ['name', 'phone', 'id', 'dorms', 'building', 'floor', 'app
 List visitors = [];         // current visitors
 String entranceDate= "";
 String leaveDate = "";
+String maintenanceMessage ="";
 
 //String siteUrl ="http://127.0.0.1:5000/";         // put url
 String siteUrl = "https://meonot.shikunbinui.com";
@@ -21,6 +22,14 @@ String? ourValidator(RegExp r,String? val, String text ){
   }
   return null;
 }
+
+String? maintananceValidator(String? val, String text ){
+  if (val == null || val.isEmpty) {
+    return text;
+  }
+  return null;
+}
+
 Widget message(bool deleteAll){
   if(deleteAll){
     return const Text('אם תצאו, נתוני המבקרים ימחקו, האם תרצו לצאת?');
