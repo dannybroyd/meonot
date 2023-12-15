@@ -61,6 +61,7 @@ Future<void> _fillOutProfile(WebViewController controller) async{
   await _dropDownValueChange(controller, 'DropDownBuilding', _validBuidling());
   await _dropDownValueChange(controller, 'DropDownFloor', _validFloor());
   await _fillValidUnitsInWeb(controller, myProfile.appartment);
+  await _fillValidSide(controller);
   await Future.delayed(const Duration(seconds: 1));
 }
 
@@ -137,5 +138,12 @@ String _validDorms(){
     else {
       //maybe add edgecase
       return "${_validDorms()}${myProfile.building}0${myProfile.floor}";
+    }
+  }
+
+  Future<void> _fillValidSide(WebViewController controller) async{
+    if (_validDorms() == '1'){
+      //dorms are einstein, need side
+      await _dropDownValueChange(controller, 'DropDownSide', myProfile.side);
     }
   }

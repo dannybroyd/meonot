@@ -9,11 +9,20 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfileFormState extends State<ProfilePage> {
   final _formKey = GlobalKey<FormBuilderState>();
-  bool filled = false;
+  final _myBox = Hive.box('myUserSettings');
   String e = "einstein";
   String b = "broshim";
   List<String> all_buildings = ["A","B","C","D","E","F","G","H","I","J","K"];
   List<String> all_floors = ["-1","0","1","2","3","4","5","6","7","8","9","10","11", "12","13","14","15","G","ROOF"];
+
+  bool _checkBoxNotFull(){
+    for(final f in fieldListUser){
+      if(_myBox.get(f) == null || _myBox.get(f) == ''){
+        return true;
+      }
+    }
+    return false;
+  }
 
   String? pickPlease(String? val){  // for validation of frop down field
     if(val==null || val.isEmpty){
@@ -26,7 +35,7 @@ class _ProfileFormState extends State<ProfilePage> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: PopScope(
-        canPop: filled,
+        canPop: !_checkBoxNotFull(),
         onPopInvoked: (bool didPop){
           if (didPop){
             return;
@@ -98,7 +107,6 @@ class _ProfileFormState extends State<ProfilePage> {
                 onPressed: (){
                 setState(() {   
                   if(_formKey.currentState!.validate()){
-                    filled = true;
                     myProfile.name = _formKey.currentState!.fields['name']!.value;
                     myProfile.id = _formKey.currentState!.fields['id']!.value;
                     myProfile.phone = _formKey.currentState!.fields['phone']!.value;
@@ -106,7 +114,13 @@ class _ProfileFormState extends State<ProfilePage> {
                     myProfile.building = _formKey.currentState!.fields['building']!.value;
                     myProfile.floor = _formKey.currentState!.fields['floor']!.value;
                     myProfile.appartment = _formKey.currentState!.fields['appartment']!.value;
-                    myProfile.side = _formKey.currentState!.fields['side']!.value;
+                    if(_formKey.currentState!.fields['side']!.value == null){
+                      // dont want to insert null to database
+                      myProfile.side = '';
+                    }
+                    else{
+                      myProfile.side = _formKey.currentState!.fields['side']!.value;
+                    }
                     myProfile.updateData();
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("הפרטים נשמרו")));
                     Navigator.pushNamed(context, '/homepage');
@@ -151,3 +165,4 @@ void _showCantLeave(BuildContext context){
       },
    );
 }
+

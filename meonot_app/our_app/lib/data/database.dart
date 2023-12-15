@@ -9,7 +9,7 @@ class UserData{
   String building = '';
   String floor = '';
   String appartment = '';
-  String? side = '';
+  String side = '';
   List favorites = [];
 
   void loadData(){

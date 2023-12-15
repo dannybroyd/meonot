@@ -31,7 +31,6 @@ class _HomePageState extends State<HomePage> {
             TextButton(onPressed: () => Navigator.pop(context),
             child: const Text("הבנתי"))
           ],
-      
         ),
       ),);
   }
@@ -40,7 +39,7 @@ class _HomePageState extends State<HomePage> {
   void initState(){
     if(_myBox.isNotEmpty){
       myProfile.loadData();
-      }
+    }
     super.initState();
     checkFirstSeen();
     }
@@ -50,6 +49,7 @@ class _HomePageState extends State<HomePage> {
     bool _seen = (prefs.getBool('seen') ?? false);
     if (!_seen || _checkBoxNotFull()) {
       await prefs.setBool('seen', true); 
+      myProfile.updateData();
       Navigator.pushNamed(context, '/profilepage');
       _tellUserProfile();
     } 
