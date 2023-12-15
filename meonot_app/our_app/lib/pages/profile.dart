@@ -9,6 +9,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfileFormState extends State<ProfilePage> {
   final _formKey = GlobalKey<FormBuilderState>();
+  bool filled = false;
   String e = "einstein";
   String b = "broshim";
   List<String> all_buildings = ["A","B","C","D","E","F","G","H","I","J","K"];
@@ -24,86 +25,129 @@ class _ProfileFormState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
-      child: Scaffold(
-        appBar: const MyAppBar(text: "הפרופיל שלי", middle: true,),
-        body: Padding(padding:  const EdgeInsets.all(30),
-         child: FormBuilder(
-          key: _formKey,
-          child: ListView(
-          children: [
-            MainFormField(
-              name: "name",
-              hintText: 'שם',
-              initalValue: myProfile.name,
-              validator:(val){return ourValidator(validEngAndHeb, val, " השם אינו תקין ");}
-            ),
-            MainFormField(
-              name: "id",
-              hintText: 'תעודת זהות',
-              initalValue: myProfile.id,
-              keyboardType: TextInputType.number,
-              validator:(val){return ourValidator(validId, val, "ת.ז אינה תקינה");}
-            ),
-            MainFormField(
-              name: "phone",
-              hintText: 'טלפון',
-              initalValue: myProfile.phone,
-              keyboardType: TextInputType.phone,
-              validator:(val){return ourValidator(validPhone, val, " מספר הטלפון אינו תקין ");}
-            ),
-            DropDownField(
-              name: "meonot",
-              hintText:"מעונות" ,
-              initalValue: myProfile.dorms,
-              validator: pickPlease,
-              lst: const ["broshim", "einstein"],
+      child: PopScope(
+        canPop: filled,
+        onPopInvoked: (bool didPop){
+          if (didPop){
+            return;
+          }
+          _showCantLeave(context);
+        },
+        child: Scaffold(
+          appBar: const MyAppBar(text: "הפרופיל שלי", middle: true,),
+          body: Padding(padding:  const EdgeInsets.all(30),
+           child: FormBuilder(
+            key: _formKey,
+            child: ListView(
+            children: [
+              MainFormField(
+                name: "name",
+                hintText: 'שם',
+                initalValue: myProfile.name,
+                validator:(val){return ourValidator(validEngAndHeb, val, " השם אינו תקין ");}
               ),
-            DropDownField(
-              name: "building",
-              hintText:"בניין" ,
-              initalValue: myProfile.building,
-              validator: pickPlease,
-              lst: all_buildings,
+              MainFormField(
+                name: "id",
+                hintText: 'תעודת זהות',
+                initalValue: myProfile.id,
+                keyboardType: TextInputType.number,
+                validator:(val){return ourValidator(validId, val, "ת.ז אינה תקינה");}
               ),
-            DropDownField(
-              name: "floor",
-              hintText:"קומה",
-              initalValue: myProfile.floor,
-              validator: pickPlease,
-              lst: all_floors,         
+              MainFormField(
+                name: "phone",
+                hintText: 'טלפון',
+                initalValue: myProfile.phone,
+                keyboardType: TextInputType.phone,
+                validator:(val){return ourValidator(validPhone, val, " מספר הטלפון אינו תקין ");}
               ),
-            MainFormField(
-              name: "appartment",
-              hintText: 'מספר דירה',
-              initalValue: myProfile.appartment,
-              keyboardType: TextInputType.number,
-              validator:(val){return ourValidator(validNumber, val, " מספר הדירה אינו תקין ");}
-            ),
-            const SizedBox(height: 30,),
-            ElevatedButton(
-              onPressed: (){
-              setState(() {   
-                if(_formKey.currentState!.validate()){
-                  myProfile.name = _formKey.currentState!.fields['name']!.value;
-                  myProfile.id = _formKey.currentState!.fields['id']!.value;
-                  myProfile.phone = _formKey.currentState!.fields['phone']!.value;
-                  myProfile.dorms = _formKey.currentState!.fields['meonot']!.value;
-                  myProfile.building = _formKey.currentState!.fields['building']!.value;
-                  myProfile.floor = _formKey.currentState!.fields['floor']!.value;
-                  myProfile.appartment = _formKey.currentState!.fields['appartment']!.value;
-                  myProfile.updateData();
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("הפרטים נשמרו")));
-                  Navigator.pushNamed(context, '/homepage');
-                  }
-              });  // saves the values
-            },
-            style: 
-            ButtonStyle(shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)))), child: const Text("שמירה")), 
-            // TODO: make class of button, because we have same button in 3 different forms
-          ],
-         )),
+              DropDownField(
+                name: "meonot",
+                hintText:"מעונות" ,
+                initalValue: myProfile.dorms,
+                validator: pickPlease,
+                lst: const ["ברושים", "איינשטיין"],
+                ),
+              DropDownField(
+                name: "building",
+                hintText:"בניין" ,
+                initalValue: myProfile.building,
+                validator: pickPlease,
+                lst: all_buildings,
+                ),
+              DropDownField(
+                name: "floor",
+                hintText:"קומה",
+                initalValue: myProfile.floor,
+                validator: pickPlease,
+                lst: all_floors,         
+                ),
+              MainFormField(
+                name: "appartment",
+                hintText: 'מספר דירה',
+                initalValue: myProfile.appartment,
+                keyboardType: TextInputType.number,
+                validator:(val){return ourValidator(validNumber, val, " מספר הדירה אינו תקין ");}
+              ),
+              const DropDownField(
+                name: "side",
+                hintText: "צד (השאר ריק אם אין)", 
+                lst: ["ימין", "שמאל", ""], 
+                initalValue: null),
+              const SizedBox(height: 30,),
+              ElevatedButton(
+                onPressed: (){
+                setState(() {   
+                  if(_formKey.currentState!.validate()){
+                    filled = true;
+                    myProfile.name = _formKey.currentState!.fields['name']!.value;
+                    myProfile.id = _formKey.currentState!.fields['id']!.value;
+                    myProfile.phone = _formKey.currentState!.fields['phone']!.value;
+                    myProfile.dorms = _formKey.currentState!.fields['meonot']!.value;
+                    myProfile.building = _formKey.currentState!.fields['building']!.value;
+                    myProfile.floor = _formKey.currentState!.fields['floor']!.value;
+                    myProfile.appartment = _formKey.currentState!.fields['appartment']!.value;
+                    myProfile.side = _formKey.currentState!.fields['side']!.value;
+                    myProfile.updateData();
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("הפרטים נשמרו")));
+                    Navigator.pushNamed(context, '/homepage');
+                    }
+                });  // saves the values
+              },
+              style: 
+              ButtonStyle(shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)))), child: const Text("שמירה")), 
+            ],
+           )),
+          ),
         ),
       ),
     );
   }
+}
+
+void _showCantLeave(BuildContext context){
+   showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Directionality(
+          textDirection: TextDirection.rtl,
+          child: AlertDialog(
+            title: const Text('סיימו למלא'),
+            content: const Text(
+              'אנא סיימו קודם למלא את הפרטים שלכם, ולאחר מכן תצאו',
+            ),
+            actions: <Widget>[
+              TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: Theme.of(context).textTheme.labelLarge,
+                ),
+                child: const Text('הבנתי'),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        );
+      },
+   );
 }

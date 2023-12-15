@@ -9,6 +9,7 @@ class UserData{
   String building = '';
   String floor = '';
   String appartment = '';
+  String? side = '';
   List favorites = [];
 
   void loadData(){
@@ -19,16 +20,17 @@ class UserData{
     building = _myBox.get('building');
     floor = _myBox.get('floor');
     appartment = _myBox.get('appartment');
-    if(_myBox.get('visitors') != null){
-      favorites = _myBox.get('visitors');
+    side = _myBox.get('side');
+    if(_myBox.get('favorites') != null){
+      favorites = _myBox.get('favorites');
     }
   }
 
   void updateData(){
-    _myBox.putAll({'name': name, 'phone': phone, 'id': id, 'dorms': dorms, 'building': building, 'floor': floor, 'appartment': appartment});
+    _myBox.putAll({'name': name, 'phone': phone, 'id': id, 'dorms': dorms, 'building': building, 'floor': floor, 'appartment': appartment, 'side': side});
   }
 
-  void updateVisitors(){
-    _myBox.put('visitors', favorites);
+  void updateFavorites(){
+    _myBox.put('favorites', favorites);
   }
 }

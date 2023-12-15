@@ -14,7 +14,7 @@ class DropDownField extends StatelessWidget {
   final String name;
   final String hintText;
   final List<String> lst;
-  final String initalValue;
+  final String? initalValue;
   final String? Function(String?)? validator;
 
 
