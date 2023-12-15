@@ -66,7 +66,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                 child: ListView.builder(
                   itemCount: myProfile.favorites.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return VisitorTile(savedVisitor: myProfile.favorites[index],
+                    return VisitorTile(savedVisitor: myProfile.favorites[index], deleteFunction: (context)=> deletefunc(index),
                     isOverNight: widget._isOvernight,);
                     // return VisitorTile(
                     //   savedVisitor: myProfile.visitors[index],
@@ -79,5 +79,12 @@ class _FavoritesPageState extends State<FavoritesPage> {
         ),
       ),
     );
+  }
+  
+ void deletefunc(int index) {
+  setState(() {
+    myProfile.favorites.removeAt(index);
+    myProfile.updateFavorites();
+    });
   }
 }
