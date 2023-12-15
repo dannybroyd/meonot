@@ -1,7 +1,7 @@
 import 'package:our_app/util/resources/importss.dart';
 
 class WebViewPage extends StatefulWidget {
-  const WebViewPage({super.key, required this.isOverNight,this.isMaintenance = false });
+  const WebViewPage({super.key, required this.isOverNight, this.isMaintenance = false });
   final bool isOverNight;
   final bool isMaintenance;
 
@@ -31,8 +31,11 @@ class _WebViewPageState extends State<WebViewPage> {
             await _fillOutDay(controller);
             controller.runJavascript('window.scrollTo(0, document.body.scrollHeight)');
           }
-          else if(widget.isMaintenance){     // maintenance
-            await _fillOutProfile(controller);
+          else if(widget.isMaintenance && !changed){     // maintenance
+            changed = true;
+            await _fillOutMaintenance(controller);
+            controller.runJavascript('window.scrollTo(0, document.body.scrollHeight)');
+
           }
         }
       )
@@ -80,6 +83,13 @@ Future<void> _fillOutDay(WebViewController controller) async{
   _elementValueChange(controller, 'Guest3Phone_TB', visitors[2].phone);
   }
   await Future.delayed(const Duration(seconds: 1));  
+}
+
+Future<void> _fillOutMaintenance(WebViewController controller)async {
+  await _fillOutProfile(controller);
+  await _dropDownValueChange(controller, 'DropDownFaultCategory', 'MNT');
+  controller.runJavascript("document.getElementById('ProblemDesc').value='$maintenanceMessage'");
+
 }
 
 void _elementValueChange(WebViewController controller, id, value){
