@@ -35,6 +35,7 @@ class DropDownField extends StatelessWidget {
         validator: validator,
         icon: const Icon(Icons.arrow_drop_down_circle_outlined),
         decoration: InputDecoration(
+          label: Text(hintText),
           hintText: hintText,
           border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20)

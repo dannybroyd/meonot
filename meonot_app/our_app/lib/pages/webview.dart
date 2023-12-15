@@ -13,32 +13,37 @@ class _WebViewPageState extends State<WebViewPage> {
   bool changed = false;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: WebView(
-        javascriptMode: JavascriptMode.unrestricted,
-        initialUrl: siteUrl,
-        onWebViewCreated: (controller){
-          this.controller = controller;
-        },
-        onPageFinished: (siteUrl) async{
-          if(widget.isOverNight && !changed && !widget.isMaintenance){
-            changed = true;
-            await _fillOutNight(controller);
-            controller.runJavascript('window.scrollTo(0, document.body.scrollHeight)');
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        body: WebView(
+          javascriptMode: JavascriptMode.unrestricted,
+          initialUrl: siteUrl,
+          onWebViewCreated: (controller){
+            this.controller = controller;
+          },
+          onPageFinished: (siteUrl) async{
+            if(widget.isOverNight && !changed && !widget.isMaintenance){
+              changed = true;
+              await _fillOutNight(controller);
+              controller.runJavascript('window.scrollTo(0, document.body.scrollHeight)');
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("אנא הזן את קוד האבטחה")));
+            }
+            else if(!changed && !widget.isMaintenance){
+              changed = true;
+              await _fillOutDay(controller);
+              controller.runJavascript('window.scrollTo(0, document.body.scrollHeight)');
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("אנא הזן את קוד האבטחה")));
+            }
+            else if(widget.isMaintenance && !changed){     // maintenance
+              changed = true;
+              await _fillOutMaintenance(controller);
+              controller.runJavascript('window.scrollTo(0, document.body.scrollHeight)');
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("אנא הזן את קוד האבטחה")));
+            }
           }
-          else if(!changed && !widget.isMaintenance){
-            changed = true;
-            await _fillOutDay(controller);
-            controller.runJavascript('window.scrollTo(0, document.body.scrollHeight)');
-          }
-          else if(widget.isMaintenance && !changed){     // maintenance
-            changed = true;
-            await _fillOutMaintenance(controller);
-            controller.runJavascript('window.scrollTo(0, document.body.scrollHeight)');
-
-          }
-        }
-      )
+        )
+      ),
     );
   }
 }
@@ -52,6 +57,7 @@ Future<void> _fillOutNight(WebViewController controller) async{
   _elementValueChange(controller, 'GuestID_TB', visitors[0].id);
   _elementValueChange(controller, 'GuestName_TB', visitors[0].name);
   _elementValueChange(controller, 'GuestPhone_TB', visitors[0].phone);
+  await Future.delayed(const Duration(milliseconds: 600));
 }
 
 Future<void> _fillOutProfile(WebViewController controller) async{
@@ -120,7 +126,8 @@ Future<void> _fillValidUnitsInWeb(WebViewController controller, appartment) asyn
 
 String _validDorms(){
     //on website 1 is einstein, 2 is broshim
-    if (myProfile.dorms == "einstein"){
+
+    if (myProfile.dorms == "איינשטיין"){
       return "1";
     }
     return "2";

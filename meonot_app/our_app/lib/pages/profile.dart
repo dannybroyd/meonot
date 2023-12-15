@@ -97,11 +97,11 @@ class _ProfileFormState extends State<ProfilePage> {
                 keyboardType: TextInputType.number,
                 validator:(val){return ourValidator(validNumber, val, " מספר הדירה אינו תקין ");}
               ),
-              const DropDownField(
+              DropDownField(
                 name: "side",
                 hintText: "צד (השאר ריק אם אין)", 
-                lst: ["ימין", "שמאל", ""], 
-                initalValue: null),
+                lst: const ["ימין", "שמאל", ""], 
+                initalValue: myProfile.side),
               const SizedBox(height: 30,),
               ElevatedButton(
                 onPressed: (){
