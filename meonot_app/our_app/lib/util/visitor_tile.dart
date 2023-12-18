@@ -33,7 +33,8 @@ class _VisitorTileState extends State<VisitorTile> {
              children: [SlidableAction(
                 onPressed: widget.deleteFunction,
                 icon: Icons.delete,
-                backgroundColor: Colors.red.shade300,)]
+                backgroundColor: Colors.red.shade300,
+                borderRadius: BorderRadius.circular(16),),]
           ),
           child: ListTile(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),

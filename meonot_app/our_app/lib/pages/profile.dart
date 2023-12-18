@@ -123,7 +123,7 @@ class _ProfileFormState extends State<ProfilePage> {
                     }
                     myProfile.updateData();
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("הפרטים נשמרו")));
-                    Navigator.pushNamed(context, '/homepage');
+                    Navigator.pop(context);
                     }
                 });  // saves the values
               },
