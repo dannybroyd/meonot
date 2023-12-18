@@ -41,7 +41,9 @@ class _WebViewPageState extends State<WebViewPage> {
                 showDialog(
                   context: context, 
                   builder: (context) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator(
+                      strokeWidth: 5,
+                    ));
                   });
                 if(widget.isOverNight && !widget.isMaintenance){
                   await _fillOutNight(controller);
