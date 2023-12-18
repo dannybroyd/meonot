@@ -1,7 +1,7 @@
 import 'package:our_app/util/resources/importss.dart';
 
 class WebViewPage extends StatefulWidget {
-  const WebViewPage({super.key, required this.isOverNight, this.isMaintenance = false });
+  const WebViewPage({super.key, required this.isOverNight, this.isMaintenance = false});
   final bool isOverNight;
   final bool isMaintenance;
 
@@ -15,36 +15,51 @@ class _WebViewPageState extends State<WebViewPage> {
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
-      child: Scaffold(
-        body: WebView(
-          javascriptMode: JavascriptMode.unrestricted,
-          initialUrl: siteUrl,
-          onWebViewCreated: (controller){
-            this.controller = controller;
-          },
-          onPageFinished: (siteUrl) async{
-            if (!changed){
-              changed = true;
-              showDialog(
-                context: context, 
-                builder: (context) {
-                  return const Center(child: CircularProgressIndicator());
-                });
-              if(widget.isOverNight && !widget.isMaintenance){
-                await _fillOutNight(controller);
-              }
-              else if(!widget.isMaintenance){
-                await _fillOutDay(controller);
-              }
-              else {     // maintenance
-                await _fillOutMaintenance(controller);
-              }
-              controller.runJavascript('window.scrollTo(0, document.body.scrollHeight)');
-              Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("אנא הזן את קוד האבטחה")));
-            }
+      child: PopScope(
+        canPop: false,
+        onPopInvoked: (bool didPop){
+          if (didPop){
+          return;
           }
-        )
+          visitors.clear();
+          entranceDate = '';
+          leaveDate = '';
+          maintenanceMessage = '';
+          Navigator.pushNamed(context, '/homepage');
+        },
+        child: Scaffold(
+          appBar: const MyAppBar(text: " ", middle: true,),
+          body: WebView(
+            javascriptMode: JavascriptMode.unrestricted,
+            initialUrl: siteUrl,
+            onWebViewCreated: (controller){
+              this.controller = controller;
+            },
+            onPageFinished: (siteUrl) async{
+              if (!changed){
+                changed = true;
+                showDialog(
+                  context: context, 
+                  builder: (context) {
+                    return const Center(child: CircularProgressIndicator());
+                  });
+                if(widget.isOverNight && !widget.isMaintenance){
+                  await _fillOutNight(controller);
+                }
+                else if(!widget.isMaintenance){
+                  await _fillOutDay(controller);
+                }
+                else {     // maintenance
+                  await _fillOutMaintenance(controller);
+                }
+                controller.runJavascript('window.scrollTo(0, document.body.scrollHeight)');
+                Navigator.pop(context);
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("אנא הזן את קוד האבטחה"),
+                duration: Duration(seconds: 3),));
+              }
+            }
+          )
+        ),
       ),
     );
   }
