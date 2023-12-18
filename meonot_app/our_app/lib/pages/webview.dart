@@ -23,22 +23,24 @@ class _WebViewPageState extends State<WebViewPage> {
             this.controller = controller;
           },
           onPageFinished: (siteUrl) async{
-            if(widget.isOverNight && !changed && !widget.isMaintenance){
+            if (!changed){
               changed = true;
-              await _fillOutNight(controller);
+              showDialog(
+                context: context, 
+                builder: (context) {
+                  return const Center(child: CircularProgressIndicator());
+                });
+              if(widget.isOverNight && !widget.isMaintenance){
+                await _fillOutNight(controller);
+              }
+              else if(!widget.isMaintenance){
+                await _fillOutDay(controller);
+              }
+              else {     // maintenance
+                await _fillOutMaintenance(controller);
+              }
               controller.runJavascript('window.scrollTo(0, document.body.scrollHeight)');
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("אנא הזן את קוד האבטחה")));
-            }
-            else if(!changed && !widget.isMaintenance){
-              changed = true;
-              await _fillOutDay(controller);
-              controller.runJavascript('window.scrollTo(0, document.body.scrollHeight)');
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("אנא הזן את קוד האבטחה")));
-            }
-            else if(widget.isMaintenance && !changed){     // maintenance
-              changed = true;
-              await _fillOutMaintenance(controller);
-              controller.runJavascript('window.scrollTo(0, document.body.scrollHeight)');
+              Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("אנא הזן את קוד האבטחה")));
             }
           }
