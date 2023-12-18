@@ -6,9 +6,9 @@ class VisitorRequestPage extends StatefulWidget {
   State<VisitorRequestPage> createState() => _VisitorRequestPageState();
 
   String printNames(){
-    String result = '';
+    String result = 'המבקרים שלי:\n';
     for(Visitor visitor in visitors){
-      result += '${visitor.name}, ';
+      result += '${visitor.name}\n';
     }
     return result;
   }
@@ -43,7 +43,10 @@ class _VisitorRequestPageState extends State<VisitorRequestPage> {
             padding: const EdgeInsets.all(16.0),
             child: ListView(children: [
               DatePicker(name: "entranceDate", hintText: "תאריך כניסה", controller: dateController,),
-              Text(widget.printNames()),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Text(widget.printNames(), style:const TextStyle(height: 2, fontSize: 18)) ,
+              ),
               ElevatedButton(
               onPressed: (){
                 if(visitors.length <=2){

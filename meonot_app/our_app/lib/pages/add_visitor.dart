@@ -47,13 +47,14 @@ class _AddVisitorPageState extends State<AddVisitorPage> {
                         final savedVisitor = Visitor(
                             id: _formKey1.currentState!.fields['id']!.value,
                             name: _formKey1.currentState!.fields['name']!.value, 
-                            phone: _formKey1.currentState!.fields['phone']!.value);
+                            phone: _formKey1.currentState!.fields['phone']!.value
+                            );
+                          visitors.add(savedVisitor);
                         if(_formKey1.currentState!.fields['checkBox']!.value){
                           // if you want to add to favorites
                             myProfile.favorites.add(savedVisitor);
                             myProfile.updateFavorites();
                             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("פרטי האורח נשמרו")));
-                            visitors.add(savedVisitor);
                             }
                             if(widget._isOvernight){
                               Navigator.pushNamed(context, '/overnightpage');

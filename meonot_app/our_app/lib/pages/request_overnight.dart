@@ -15,24 +15,33 @@ class _OvernightRequestPageState extends State<OvernightRequestPage> {
   Widget build(BuildContext context) {
     return Directionality(
       textDirection: TextDirection.rtl,
-      child: Scaffold(
-        appBar: const MyAppBar(text: "בחר תאריך", middle: true,),
-        floatingActionButton: BottomButton(
-            onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const WebViewPage(isOverNight: true,),));
-              entranceDate = dateControllerEntrance.text;
-              leaveDate = dateControllerLeave.text;
-            },         
-            label: "שליחת בקשה",
-            icon: const Icon(Icons.send),
+      child: WillPopScope(
+        onWillPop: () async {
+          Future<bool> temp = Future<bool>.value(false);
+          setState(() {
+            temp = leaveProgress(context, false);
+          });
+          return temp;
+        },
+        child: Scaffold(
+          appBar: const MyAppBar(text: "בחר תאריך", middle: true,),
+          floatingActionButton: BottomButton(
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const WebViewPage(isOverNight: true,),));
+                entranceDate = dateControllerEntrance.text;
+                leaveDate = dateControllerLeave.text;
+              },         
+              label: "שליחת בקשה",
+              icon: const Icon(Icons.send),
+            ),
+          body: 
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ListView(children:  [
+              DatePicker(name: "entranceDate", hintText: "תאריך כניסה",controller: dateControllerEntrance,),
+              DatePicker(name: "leaveDate", hintText: "תאריך יציאה", leave: true, controller: dateControllerLeave,),
+              ]),
           ),
-        body: 
-        Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: ListView(children:  [
-            DatePicker(name: "entranceDate", hintText: "תאריך כניסה",controller: dateControllerEntrance,),
-            DatePicker(name: "leaveDate", hintText: "תאריך יציאה", leave: true, controller: dateControllerLeave,),
-            ]),
         ),
       ),
     );
