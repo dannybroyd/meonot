@@ -5,17 +5,16 @@ class MainFormField extends StatelessWidget {
     super.key,
     required this.name,
     required this.hintText,
-    this.initalValue ="",
+    this.initalValue = "",
     this.validator,
     this.keyboardType = TextInputType.text,
-    });
+  });
 
   final String hintText;
   final String name;
   final String? Function(String?)? validator;
-  final String initalValue ;
+  final String initalValue;
   final TextInputType keyboardType;
-
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +26,10 @@ class MainFormField extends StatelessWidget {
         initialValue: initalValue,
         keyboardType: keyboardType,
         decoration: InputDecoration(
-          label: Text(hintText) ,
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
+            label: Text(hintText),
+            border:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
       ),
     );
   }
 }
-

@@ -24,23 +24,40 @@ class _OvernightRequestPageState extends State<OvernightRequestPage> {
           return temp;
         },
         child: Scaffold(
-          appBar: const MyAppBar(text: "בחר תאריך", middle: true,),
+          appBar: const MyAppBar(
+            text: "בחר תאריך",
+            middle: true,
+          ),
           floatingActionButton: BottomButton(
-              onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const WebViewPage(isOverNight: true,),));
-                entranceDate = dateControllerEntrance.text;
-                leaveDate = dateControllerLeave.text;
-              },         
-              label: "שליחת בקשה",
-              icon: const Icon(Icons.send),
-            ),
-          body: 
-          Padding(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const WebViewPage(
+                      isOverNight: true,
+                    ),
+                  ));
+              entranceDate = dateControllerEntrance.text;
+              leaveDate = dateControllerLeave.text;
+            },
+            label: "שליחת בקשה",
+            icon: const Icon(Icons.send),
+          ),
+          body: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: ListView(children:  [
-              DatePicker(name: "entranceDate", hintText: "תאריך כניסה",controller: dateControllerEntrance,),
-              DatePicker(name: "leaveDate", hintText: "תאריך יציאה", leave: true, controller: dateControllerLeave,),
-              ]),
+            child: ListView(children: [
+              DatePicker(
+                name: "entranceDate",
+                hintText: "תאריך כניסה",
+                controller: dateControllerEntrance,
+              ),
+              DatePicker(
+                name: "leaveDate",
+                hintText: "תאריך יציאה",
+                leave: true,
+                controller: dateControllerLeave,
+              ),
+            ]),
           ),
         ),
       ),

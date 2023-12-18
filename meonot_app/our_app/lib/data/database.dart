@@ -1,6 +1,6 @@
 import 'package:our_app/util/resources/importss.dart';
 
-class UserData{
+class UserData {
   final _myBox = Hive.box('myUserSettings');
   String name = '';
   String phone = '';
@@ -12,7 +12,7 @@ class UserData{
   String side = '';
   List favorites = [];
 
-  void loadData(){
+  void loadData() {
     name = _myBox.get('name');
     phone = _myBox.get('phone');
     id = _myBox.get('id');
@@ -21,16 +21,25 @@ class UserData{
     floor = _myBox.get('floor');
     appartment = _myBox.get('appartment');
     side = _myBox.get('side');
-    if(_myBox.get('favorites') != null){
+    if (_myBox.get('favorites') != null) {
       favorites = _myBox.get('favorites');
     }
   }
 
-  void updateData(){
-    _myBox.putAll({'name': name, 'phone': phone, 'id': id, 'dorms': dorms, 'building': building, 'floor': floor, 'appartment': appartment, 'side': side});
+  void updateData() {
+    _myBox.putAll({
+      'name': name,
+      'phone': phone,
+      'id': id,
+      'dorms': dorms,
+      'building': building,
+      'floor': floor,
+      'appartment': appartment,
+      'side': side
+    });
   }
 
-  void updateFavorites(){
+  void updateFavorites() {
     _myBox.put('favorites', favorites);
   }
 }

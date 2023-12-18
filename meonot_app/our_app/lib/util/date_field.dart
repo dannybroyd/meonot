@@ -8,15 +8,22 @@ class DatePicker extends StatefulWidget {
   final bool leave;
   final TextEditingController controller;
 
+  const DatePicker({
+    super.key,
+    required this.name,
+    required this.hintText,
+    required this.controller,
+    this.validator,
+    this.leave = false,
+  });
 
-  const DatePicker({super.key, required this.name, required this.hintText,required this.controller, this.validator, this.leave = false,});
-
-  DateTime _defualtDate(){
-    if (leave){
+  DateTime _defualtDate() {
+    if (leave) {
       return DateTime.now().add(const Duration(days: 1));
     }
     return DateTime.now();
   }
+
   @override
   State<DatePicker> createState() => _DatePickerState();
 }
@@ -32,12 +39,12 @@ class _DatePickerState extends State<DatePicker> {
         name: widget.name,
         initialValue: widget._defualtDate(),
         firstDate: DateTime.now(),
-        lastDate: DateTime.now().add(const Duration(days:30)),
+        lastDate: DateTime.now().add(const Duration(days: 30)),
         inputType: InputType.date,
         decoration: InputDecoration(
-          label: Text(widget.hintText),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(20))
-        ),
+            label: Text(widget.hintText),
+            border:
+                OutlineInputBorder(borderRadius: BorderRadius.circular(20))),
       ),
     );
   }

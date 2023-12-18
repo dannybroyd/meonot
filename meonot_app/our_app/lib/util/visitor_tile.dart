@@ -26,17 +26,17 @@ class _VisitorTileState extends State<VisitorTile> {
             showDialog(
                 context: context,
                 builder: (BuildContext context) {
-                  return  Directionality(
+                  return Directionality(
                     textDirection: TextDirection.rtl,
                     child: AlertDialog(
-                      content: const Text("מבקר זה כבר נבחר"),
-                      actions: <Widget>[
-                       TextButton(onPressed: (){
-                        Navigator.pop(context);
-                       },
-                      child: const Text("אישור")) 
-                      ]
-                    ),
+                        content: const Text("מבקר זה כבר נבחר"),
+                        actions: <Widget>[
+                          TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text("אישור"))
+                        ]),
                   );
                 });
           }
