@@ -43,7 +43,7 @@ class _ProfileFormState extends State<ProfilePage> {
           _showCantLeave(context);
         },
         child: Scaffold(
-          appBar: const MyAppBar(text: "הפרופיל שלי", middle: true,),
+          appBar: const MyAppBar(text: "הפרופיל שלי", middle: true, isProfile: true,),
           body: Padding(padding:  const EdgeInsets.all(30),
            child: FormBuilder(
             key: _formKey,

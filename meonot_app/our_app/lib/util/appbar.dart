@@ -3,7 +3,8 @@ import 'package:our_app/util/resources/importss.dart';
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String text;
   final bool middle;
-  const MyAppBar({super.key, this.text = "", this.middle = false});
+  final bool isProfile;
+  const MyAppBar({super.key, this.text = "", this.middle = false, this.isProfile = false});
 
   String _checktime() {
     //check time for greeting
@@ -45,7 +46,9 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions:[
         IconButton(onPressed: (){
-          Navigator.pushNamed(context, '/profilepage');
+          if(!isProfile){
+            Navigator.pushNamed(context, '/profilepage');
+            }
         }, 
         icon: const Icon(Icons.account_circle),
         iconSize: 36)
