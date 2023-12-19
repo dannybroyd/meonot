@@ -44,7 +44,7 @@ class _MaintenancePageState extends State<MaintenancePage> {
               children: [
                 const Center(
                     child: Text(
-                  " :הפנייה שלי",
+                  "הפנייה שלי:",
                   style: TextStyle(fontSize: 26),
                 )),
                 FormBuilder(
