@@ -45,11 +45,13 @@ class MainButton extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(25.0),
             child: Center(
-              child: Text(
-                task,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 32,
+              child: FittedBox(
+                child: Text(
+                  task,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 32,
+                  ),
                 ),
               ),
             ),
