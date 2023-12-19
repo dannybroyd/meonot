@@ -27,3 +27,5 @@ export 'package:our_app/pages/add_visitor.dart';
 export 'package:json_theme/json_theme.dart';
 export 'dart:convert';
 export 'package:webview_flutter/webview_flutter.dart';
+export 'package:google_fonts/google_fonts.dart';
+export 'package:url_launcher/url_launcher_string.dart';

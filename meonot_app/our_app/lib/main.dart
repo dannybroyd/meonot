@@ -29,6 +29,8 @@ class MyApp extends StatelessWidget {
           '/overnightpage': (context) => const OvernightRequestPage(),
           '/visitorpage': (context) => const VisitorRequestPage(),
         },
-        theme: theme);
+        theme: theme?.copyWith(
+          textTheme: GoogleFonts.arimoTextTheme()
+        ));
   }
 }

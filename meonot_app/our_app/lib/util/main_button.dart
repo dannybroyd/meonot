@@ -1,6 +1,4 @@
 import 'package:our_app/util/resources/importss.dart';
-import 'package:url_launcher/url_launcher_string.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class MainButton extends StatelessWidget {
   final String task;
@@ -15,8 +13,7 @@ class MainButton extends StatelessWidget {
       this.isOvernight = true});
   //launch url for dorm site
   _launchURLBrowser() async {
-     launchUrlString(routeName, 
-     mode: LaunchMode.externalApplication);
+    launchUrlString(routeName, mode: LaunchMode.externalApplication);
   }
 
   @override
@@ -50,8 +47,10 @@ class MainButton extends StatelessWidget {
             child: Center(
               child: Text(
                 task,
-                style:
-                GoogleFonts.varelaRound(textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 32,) ),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 32,
+                ),
               ),
             ),
           ),
