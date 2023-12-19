@@ -1,5 +1,6 @@
 import 'package:our_app/util/resources/importss.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MainButton extends StatelessWidget {
   final String task;
@@ -21,7 +22,7 @@ class MainButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 80),
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 70),
       child: GestureDetector(
         onTap: () {
           if (link) {
@@ -40,6 +41,7 @@ class MainButton extends StatelessWidget {
           }
         },
         child: Container(
+          height: 98,
           decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.primaryContainer,
               borderRadius: BorderRadius.circular(12)),
@@ -49,7 +51,7 @@ class MainButton extends StatelessWidget {
               child: Text(
                 task,
                 style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 32),
+                GoogleFonts.varelaRound(textStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 32,) ),
               ),
             ),
           ),
