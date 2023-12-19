@@ -60,6 +60,7 @@ class _WebViewPageState extends State<WebViewPage> {
                       // maintenance
                       await _fillOutMaintenance(controller);
                     }
+                    await Future.delayed(const Duration(milliseconds: 600));
                     controller.runJavascript(
                         'window.scrollTo(0, document.body.scrollHeight)');
                     Navigator.pop(context);
