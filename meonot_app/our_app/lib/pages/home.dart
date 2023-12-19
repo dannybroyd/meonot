@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
-        appBar: const MyAppBar(),
+        appBar: const MyAppBar(isBackButton: false,),
         body: ListView(children: const [
           Padding(
             padding: EdgeInsets.fromLTRB(0, 50, 0, 15),

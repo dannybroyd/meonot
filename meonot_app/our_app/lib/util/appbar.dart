@@ -4,8 +4,9 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String text;
   final bool middle;
   final bool isProfile;
+  final bool isBackButton;
   const MyAppBar(
-      {super.key, this.text = "", this.middle = false, this.isProfile = false});
+      {super.key, this.text = "", this.middle = false, this.isProfile = false, this.isBackButton = true});
 
   String _checktime() {
     //check time for greeting
@@ -33,14 +34,17 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+        automaticallyImplyLeading: isBackButton,
         elevation: 4,
         centerTitle: middle,
         toolbarHeight: 80,
         title: Padding(
           padding: const EdgeInsets.symmetric(vertical: 12),
-          child: Text(
-            _checktime(),
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+          child: FittedBox(
+            child: Text(
+              _checktime(),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+            ),
           ),
         ),
         actions: [
