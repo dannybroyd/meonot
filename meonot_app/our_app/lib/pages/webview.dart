@@ -31,8 +31,9 @@ class _WebViewPageState extends State<WebViewPage> {
         },
         child: Scaffold(
             appBar: const MyAppBar(
-              text: " ",
+              text: "שליחת הבקשה",
               middle: true,
+              isProfile: true,
             ),
             body: WebView(
                 javascriptMode: JavascriptMode.unrestricted,

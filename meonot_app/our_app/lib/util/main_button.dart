@@ -1,4 +1,5 @@
 import 'package:our_app/util/resources/importss.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class MainButton extends StatelessWidget {
   final String task;
@@ -13,11 +14,8 @@ class MainButton extends StatelessWidget {
       this.isOvernight = true});
   //launch url for dorm site
   _launchURLBrowser() async {
-    if (await canLaunchUrl(Uri.parse(routeName))) {
-      await launchUrl(Uri.parse(routeName));
-    } else {
-      throw 'Could not launch $routeName';
-    }
+     launchUrlString(routeName, 
+     mode: LaunchMode.externalApplication);
   }
 
   @override
