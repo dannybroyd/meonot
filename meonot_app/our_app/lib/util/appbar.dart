@@ -24,8 +24,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
       } else {
         temp = "לילה טוב";
       }
-      String profileName = myProfile.name;
-      // TODO: change Guest to name when doron finishes profile
+      String profileName = _getFirstName();
       return "$temp, $profileName";
     }
     return text;
@@ -58,4 +57,9 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => const Size.fromHeight(80);
+}
+
+
+String _getFirstName(){
+  return myProfile.name.split(" ")[0];
 }
