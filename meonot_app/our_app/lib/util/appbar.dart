@@ -1,31 +1,19 @@
 import 'package:our_app/util/resources/importss.dart';
 
-class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
+class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String text;
   final bool middle;
   final bool isProfile;
   final bool isBackButton;
   const MyAppBar(
-      {super.key,
-      this.text = "",
-      this.middle = false,
-      this.isProfile = false,
-      this.isBackButton = true});
+      {super.key, this.text = "", this.middle = false, this.isProfile = false, this.isBackButton = true});
 
-  @override
-  State<MyAppBar> createState() => _MyAppBarState();
-
-  @override
-  Size get preferredSize => const Size.fromHeight(80);
-}
-
-class _MyAppBarState extends State<MyAppBar> {
   String _checktime() {
-    String temp = "";
-    setState(() {
-      //check time for greeting
-      DateTime now = DateTime.now();
-      int hours = now.hour;
+    //check time for greeting
+    String temp;
+    DateTime now = DateTime.now();
+    int hours = now.hour;
+    if (text == "") {
       if (hours >= 1 && hours <= 12) {
         temp = "בוקר טוב";
       } else if (hours >= 12 && hours < 16) {
@@ -37,20 +25,18 @@ class _MyAppBarState extends State<MyAppBar> {
       } else {
         temp = "לילה טוב";
       }
-    });
-    if (widget.text == "") {
       String profileName = _getFirstName();
       return "$temp, $profileName";
     }
-    return widget.text;
+    return text;
   }
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-        automaticallyImplyLeading: widget.isBackButton,
+        automaticallyImplyLeading: isBackButton,
         elevation: 4,
-        centerTitle: widget.middle,
+        centerTitle: middle,
         toolbarHeight: 80,
         title: Padding(
           padding: const EdgeInsets.symmetric(vertical: 12),
@@ -64,7 +50,7 @@ class _MyAppBarState extends State<MyAppBar> {
         actions: [
           IconButton(
               onPressed: () {
-                if (!widget.isProfile) {
+                if (!isProfile) {
                   Navigator.pushNamed(context, '/profilepage');
                 }
               },
@@ -72,8 +58,12 @@ class _MyAppBarState extends State<MyAppBar> {
               iconSize: 36)
         ]);
   }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(80);
 }
 
-String _getFirstName() {
+
+String _getFirstName(){
   return myProfile.name.split(" ")[0];
 }
