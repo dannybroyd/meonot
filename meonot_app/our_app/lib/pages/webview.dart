@@ -40,11 +40,7 @@ class _WebViewPageState extends State<WebViewPage> {
                 initialUrl: siteUrl,
                 onWebViewCreated: (controller) {
                   this.controller = controller;
-                },
-                onPageFinished: (siteUrl) async {
-                  if (!changed) {
-                    changed = true;
-                    showDialog(
+                  showDialog(
                         context: context,
                         builder: (context) {
                           return const Center(
@@ -52,6 +48,10 @@ class _WebViewPageState extends State<WebViewPage> {
                             strokeWidth: 5,
                           ));
                         });
+                },
+                onPageFinished: (siteUrl) async {
+                  if (!changed) {
+                    changed = true;
                     if (widget.isOverNight && !widget.isMaintenance) {
                       await _fillOutNight(controller);
                     } else if (!widget.isMaintenance) {
