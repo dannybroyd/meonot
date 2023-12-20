@@ -26,7 +26,7 @@ class DropDownField extends StatelessWidget {
   Widget build(BuildContext context) {
     // making a select form field
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 35),
       child: FormBuilderDropdown(
         name: name,
         items: _makeItems(lst),

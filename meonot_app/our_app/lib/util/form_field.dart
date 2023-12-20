@@ -19,7 +19,7 @@ class MainFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 35),
       child: FormBuilderTextField(
         name: name,
         validator: validator,
