@@ -17,7 +17,8 @@ class MainCheckBox extends StatelessWidget {
       padding: const EdgeInsets.only(left: 16, right: 16, top: 0, bottom: 16),
       child: FormBuilderCheckbox(
         name: name,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(4.0))),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(4.0))),
         title: Transform.translate(
           offset: const Offset(15, 0),
           child: title,
