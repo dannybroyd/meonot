@@ -61,31 +61,28 @@ class _VisitorRequestPageState extends State<VisitorRequestPage> {
                 child: Text(widget.printNames(),
                     style: const TextStyle(height: 2, fontSize: 18)),
               ),
-              ElevatedButton(
-                  onPressed: () {
-                    if (visitors.length <= 2) {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const FavoritesPage(
-                              isOvernight: false,
-                            ),
-                          ));
-                    } else {
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return const AlertDialog(
-                              content: Text("הגעת למכסת המבקרים המקסימלית"),
-                            );
-                          });
-                    }
-                  },
-                  style: ButtonStyle(
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12)))),
-                  child: const Text("הוספת מבקר נוסף"))
+              saveButton(
+                onPressed: () {
+                  if (visitors.length <= 2) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const FavoritesPage(
+                            isOvernight: false,
+                          ),
+                        ));
+                  } else {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return const AlertDialog(
+                            content: Text("הגעת למכסת המבקרים המקסימלית"),
+                          );
+                        });
+                  }
+                },
+                text: "הוספת מבקר נוסף",
+              )
             ]),
           ),
         ),

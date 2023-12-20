@@ -1,4 +1,5 @@
 import 'package:our_app/util/resources/importss.dart';
+ 
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -149,9 +150,9 @@ class _ProfileFormState extends State<ProfilePage> {
                         lst: const ["ימין", "שמאל", ""],
                         initalValue: myProfile.side),
                     const SizedBox(
-                      height: 30,
+                      height: 20,
                     ),
-                    ElevatedButton(
+                    saveButton(
                         onPressed: () {
                           setState(() {
                             if (_formKey.currentState!.validate()) {
@@ -186,12 +187,8 @@ class _ProfileFormState extends State<ProfilePage> {
                             }
                           }); // saves the values
                         },
-                        style: ButtonStyle(
-                            shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12)))),
-                        child: const Text("שמירה")),
+                        text: "שמירה",
+                        ),        
                   ],
                 )),
           ),
