@@ -84,7 +84,7 @@ class _ProfileFormState extends State<ProfilePage> {
             isProfile: true,
           ),
           body: Padding(
-            padding: const EdgeInsets.all(30),
+            padding: const EdgeInsets.symmetric(vertical: 30),
             child: FormBuilder(
                 key: _formKey,
                 child: ListView(
@@ -152,43 +152,49 @@ class _ProfileFormState extends State<ProfilePage> {
                     const SizedBox(
                       height: 20,
                     ),
-                    saveButton(
-                        onPressed: () {
-                          setState(() {
-                            if (_formKey.currentState!.validate()) {
-                              myProfile.name =
-                                  _formKey.currentState!.fields['name']!.value;
-                              myProfile.id =
-                                  _formKey.currentState!.fields['id']!.value;
-                              myProfile.phone =
-                                  _formKey.currentState!.fields['phone']!.value;
-                              myProfile.dorms = _formKey
-                                  .currentState!.fields['meonot']!.value;
-                              myProfile.building = _formKey
-                                  .currentState!.fields['building']!.value;
-                              myProfile.floor =
-                                  _formKey.currentState!.fields['floor']!.value;
-                              myProfile.appartment = _formKey
-                                  .currentState!.fields['appartment']!.value;
-                              if (_formKey
-                                      .currentState!.fields['side']!.value ==
-                                  null) {
-                                // dont want to insert null to database
-                                myProfile.side = '';
-                              } else {
-                                myProfile.side = _formKey
-                                    .currentState!.fields['side']!.value;
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: saveButton(
+                          onPressed: () {
+                            setState(() {
+                              if (_formKey.currentState!.validate()) {
+                                myProfile.name =
+                                    _formKey.currentState!.fields['name']!.value;
+                                myProfile.id =
+                                    _formKey.currentState!.fields['id']!.value;
+                                myProfile.phone =
+                                    _formKey.currentState!.fields['phone']!.value;
+                                myProfile.dorms = _formKey
+                                    .currentState!.fields['meonot']!.value;
+                                myProfile.building = _formKey
+                                    .currentState!.fields['building']!.value;
+                                myProfile.floor =
+                                    _formKey.currentState!.fields['floor']!.value;
+                                myProfile.appartment = _formKey
+                                    .currentState!.fields['appartment']!.value;
+                                if (_formKey
+                                        .currentState!.fields['side']!.value ==
+                                    null) {
+                                  // dont want to insert null to database
+                                  myProfile.side = '';
+                                } else {
+                                  myProfile.side = _formKey
+                                      .currentState!.fields['side']!.value;
+                                }
+                                myProfile.updateData();
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text("הפרטים נשמרו")));
+                                Navigator.pop(context);
                               }
-                              myProfile.updateData();
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content: Text("הפרטים נשמרו")));
-                              Navigator.pop(context);
-                            }
-                          }); // saves the values
-                        },
-                        text: "שמירה",
-                        ),        
+                            }); // saves the values
+                          },
+                          text: "שמירה",
+                          ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),         
                   ],
                 )),
           ),
