@@ -1,6 +1,5 @@
 import 'package:our_app/util/resources/importss.dart';
 
-
 class FavoritesPage extends StatefulWidget {
   const FavoritesPage({super.key, bool isOvernight = true})
       : _isOvernight = isOvernight;
