@@ -1,4 +1,5 @@
 import 'package:our_app/util/resources/importss.dart';
+import 'package:http/http.dart' as http;
 
 class WebViewPage extends StatefulWidget {
   const WebViewPage(
@@ -38,7 +39,7 @@ class _WebViewPageState extends State<WebViewPage> {
             body: WebView(
                 javascriptMode: JavascriptMode.unrestricted,
                 initialUrl: siteUrl,
-                onWebViewCreated: (controller) {
+                onWebViewCreated: (controller) async {
                   this.controller = controller;
                   showDialog(
                         context: context,
@@ -48,6 +49,9 @@ class _WebViewPageState extends State<WebViewPage> {
                             strokeWidth: 5,
                           ));
                         });
+                  print("bla");      
+                  http.Response response = await http.post(Uri.parse(apiUrl), body: {'id': myProfile.id});
+                  print(response);
                 },
                 onPageFinished: (siteUrl) async {
                   if (!changed) {
