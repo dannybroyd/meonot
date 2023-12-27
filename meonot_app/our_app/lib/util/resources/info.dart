@@ -128,3 +128,5 @@ Map<String, dynamic> makeDict(String category) {
   }
   return dataDict;
 }
+
+List<List> dropDownList =[['DormDropDown'. _validDorms()],['DropDownBuilding',_validBuidling() ],['DropDownFloor', _validFloor()],[myProfile.appartment]] ;
