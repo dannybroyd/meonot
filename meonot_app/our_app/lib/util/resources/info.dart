@@ -1,5 +1,5 @@
 import 'package:our_app/util/resources/importss.dart';
-
+int webViewIndex = 0;
 UserData myProfile = UserData();
 final fieldListUser = [
   'name',
@@ -129,4 +129,8 @@ Map<String, dynamic> makeDict(String category) {
   return dataDict;
 }
 
-List<List> dropDownList =[['DormDropDown'. _validDorms()],['DropDownBuilding',_validBuidling() ],['DropDownFloor', _validFloor()],[myProfile.appartment]] ;
+List<List> dropDownList =[['DormDropDown', validDorms()],['DropDownBuilding',validBuidling() ],['DropDownFloor', validFloor()],[myProfile.appartment],["placeholder for side"]] ;
+
+void updateDropDownList(){
+  dropDownList =[['DormDropDown', validDorms()],['DropDownBuilding',validBuidling() ],['DropDownFloor', validFloor()],[myProfile.appartment],["placeholder for side"]] ;
+}

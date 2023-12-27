@@ -182,6 +182,8 @@ class _ProfileFormState extends State<ProfilePage> {
                                       .currentState!.fields['side']!.value;
                                 }
                                 myProfile.updateData();
+                                // refreshes list
+                                updateDropDownList();
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
                                         content: Text("הפרטים נשמרו")));

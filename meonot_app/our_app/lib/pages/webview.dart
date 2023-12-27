@@ -6,14 +6,24 @@ class WebViewPage extends StatefulWidget {
       {super.key, required this.isOverNight, this.isMaintenance = false});
   final bool isOverNight;
   final bool isMaintenance;
-
   @override
   State<WebViewPage> createState() => _WebViewPageState();
+
+  String _eventFinder() {
+    if (isMaintenance) {
+      return "MNT";
+    }
+    if (isOverNight) {
+      return "VISITORS";
+    }
+    return "GUESTS";
+  }
 }
 
 class _WebViewPageState extends State<WebViewPage> {
   late WebViewController controller;
   bool changed = false;
+  late String event;
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -40,31 +50,27 @@ class _WebViewPageState extends State<WebViewPage> {
                 javascriptMode: JavascriptMode.unrestricted,
                 initialUrl: siteUrl,
                 onWebViewCreated: (controller) async {
+                  webViewIndex = 0;
+                  event = widget._eventFinder();
                   this.controller = controller;
                   showDialog(
-                        context: context,
-                        builder: (context) {
-                          return const Center(
-                              child: CircularProgressIndicator(
-                            strokeWidth: 5,
-                          ));
-                        });
-                  print("bla");      
-                  http.Response response = await http.post(Uri.parse(apiUrl), body: {'id': myProfile.id});
-                  print(response);
+                      context: context,
+                      builder: (context) {
+                        return const Center(
+                            child: CircularProgressIndicator(
+                          strokeWidth: 5,
+                        ));
+                      });
+                  http.Response response = await http
+                      .post(Uri.parse(apiUrl), body: {'id': myProfile.id});
                 },
                 onPageFinished: (siteUrl) async {
-                  if (!changed) {
-                    changed = true;
-                    if (widget.isOverNight && !widget.isMaintenance) {
-                      await _fillOutNight(controller);
-                    } else if (!widget.isMaintenance) {
-                      await _fillOutDay(controller);
-                    } else {
-                      // maintenance
-                      await _fillOutMaintenance(controller);
-                    }
-                    await Future.delayed(const Duration(milliseconds: 600));
+                  if (validDorms() == '2' && webViewIndex == 4){
+                    // dorms are broshim, no need for side
+                    webViewIndex++;
+                  }
+                  _doNextAction(controller, event);
+                  if (webViewIndex == dropDownList.length + 1) {
                     controller.runJavascript(
                         'window.scrollTo(0, document.body.scrollHeight)');
                     Navigator.pop(context);
@@ -73,38 +79,28 @@ class _WebViewPageState extends State<WebViewPage> {
                       duration: Duration(seconds: 3),
                     ));
                   }
+                  webViewIndex++;
                 })),
       ),
     );
   }
 }
 
-Future<void> _fillOutNight(WebViewController controller) async {
-  await _fillOutProfile(controller);
-  await _dropDownValueChange(controller, 'DropDownFaultCategory', 'VISITORS');
+void _fillOutNight(WebViewController controller) {
   _elementValueChange(controller, 'ID_TB', myProfile.id);
   _elementValueChange(controller, 'EntranceDate_TB', entranceDate);
   _elementValueChange(controller, 'LeaveDate_TB', leaveDate);
   _elementValueChange(controller, 'GuestID_TB', visitors[0].id);
   _elementValueChange(controller, 'GuestName_TB', visitors[0].name);
   _elementValueChange(controller, 'GuestPhone_TB', visitors[0].phone);
-  await Future.delayed(const Duration(milliseconds: 600));
 }
 
-Future<void> _fillOutProfile(WebViewController controller) async {
+void _fillOutProfile(WebViewController controller) {
   _elementValueChange(controller, 'FullName', myProfile.name);
   _elementValueChange(controller, 'Phone', myProfile.phone);
-  await _dropDownValueChange(controller, 'DormDropDown', _validDorms());
-  await _dropDownValueChange(controller, 'DropDownBuilding', _validBuidling());
-  await _dropDownValueChange(controller, 'DropDownFloor', _validFloor());
-  await _fillValidUnitsInWeb(controller, myProfile.appartment);
-  await _fillValidSide(controller);
-  await Future.delayed(const Duration(seconds: 1));
 }
 
-Future<void> _fillOutDay(WebViewController controller) async {
-  await _fillOutProfile(controller);
-  await _dropDownValueChange(controller, 'DropDownFaultCategory', 'GUESTS');
+void _fillOutDay(WebViewController controller) {
   _elementValueChange(controller, 'ID_TB', myProfile.id);
   _elementValueChange(controller, 'EntranceDate_TB', entranceDate);
   _elementValueChange(controller, 'GuestID_TB', visitors[0].id);
@@ -120,12 +116,9 @@ Future<void> _fillOutDay(WebViewController controller) async {
     _elementValueChange(controller, 'Guest3Name_TB', visitors[2].name);
     _elementValueChange(controller, 'Guest3Phone_TB', visitors[2].phone);
   }
-  await Future.delayed(const Duration(seconds: 1));
 }
 
-Future<void> _fillOutMaintenance(WebViewController controller) async {
-  await _fillOutProfile(controller);
-  await _dropDownValueChange(controller, 'DropDownFaultCategory', 'MNT');
+void _fillOutMaintenance(WebViewController controller) {
   controller.runJavascript(
       "document.getElementById('ProblemDesc').value='$maintenanceMessage'");
 }
@@ -159,7 +152,7 @@ Future<void> _fillValidUnitsInWeb(
   await Future.delayed(const Duration(milliseconds: 600));
 }
 
-String _validDorms() {
+String validDorms() {
   //on website 1 is einstein, 2 is broshim
 
   if (myProfile.dorms == "איינשטיין") {
@@ -168,23 +161,57 @@ String _validDorms() {
   return "2";
 }
 
-String _validBuidling() {
-  return _validDorms() + myProfile.building;
+String validBuidling() {
+  return validDorms() + myProfile.building;
 }
 
-String _validFloor() {
+String validFloor() {
   int floorNumber = int.parse(myProfile.floor);
   if (floorNumber > 9 || floorNumber == -1) {
-    return _validDorms() + myProfile.building + myProfile.floor;
+    return validDorms() + myProfile.building + myProfile.floor;
   } else {
     //maybe add edgecase
-    return "${_validDorms()}${myProfile.building}0${myProfile.floor}";
+    return "${validDorms()}${myProfile.building}0${myProfile.floor}";
   }
 }
 
 Future<void> _fillValidSide(WebViewController controller) async {
-  if (_validDorms() == '1') {
+  if (validDorms() == '1') {
     //dorms are einstein, need side
     await _dropDownValueChange(controller, 'DropDownSide', myProfile.side);
+  }
+}
+
+Future<void> _doNextAction(
+    WebViewController controller, String event) async {
+  if (webViewIndex < dropDownList.length) {
+    // special cases
+    if (webViewIndex == 0) {
+      _fillOutProfile(controller);
+    }
+    if (webViewIndex == 3) {
+      // this means we need to do units
+      await _fillValidUnitsInWeb(controller, dropDownList[webViewIndex][0]);
+    } else if (webViewIndex == 4) {
+      // this means we need to do side
+      await _fillValidSide(controller);
+    } else {
+      await _dropDownValueChange(
+          controller, dropDownList[webViewIndex][0], dropDownList[webViewIndex][1]);
+    }
+    return;
+  } else if (webViewIndex == dropDownList.length) {
+    // this means we have to fill specific to fault category
+    await _dropDownValueChange(controller, 'DropDownFaultCategory', event);
+    return;
+  } else if (webViewIndex == dropDownList.length + 1) {
+    if (event == 'VISITORS') {
+      _fillOutNight(controller);
+    } else if (event == 'GUESTS') {
+      _fillOutDay(controller);
+    } else {
+      _fillOutMaintenance(controller);
+    }
+    return;
   }
 }
