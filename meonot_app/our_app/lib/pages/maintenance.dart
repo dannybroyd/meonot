@@ -24,6 +24,7 @@ class _MaintenancePageState extends State<MaintenancePage> {
                 if (_formKey.currentState!.validate()) {
                   maintenanceMessage =
                       _formKey.currentState!.fields['maintenance']!.value;
+                  maintenanceMessage = maintenanceMessage.replaceAll("\n", "  ");
                   Navigator.push(
                       context,
                       MaterialPageRoute(
