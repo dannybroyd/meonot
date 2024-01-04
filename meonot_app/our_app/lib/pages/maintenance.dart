@@ -52,7 +52,7 @@ class _MaintenancePageState extends State<MaintenancePage> {
                     key: _formKey,
                     child: Container(
                       width: 50,
-                      height: 800,
+                      height: 400,
                       padding: const EdgeInsets.all(16.0),
                       child: FormBuilderTextField(
                         name: "maintenance",
@@ -68,7 +68,11 @@ class _MaintenancePageState extends State<MaintenancePage> {
                         maxLines: 12,
                         minLines: 8,
                       ),
-                    ))
+                    )),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Text("שימו לב, יתכן כי תצטרכו למלא גם את קטגורית שירות וסוג שירות!", style: TextStyle(fontSize: 14),),
+                )
               ],
             ),
           )),
